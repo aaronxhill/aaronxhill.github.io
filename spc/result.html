@@ -13,10 +13,14 @@ TODO:
     
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
-        <title>Skylane Short Field Takeoff Distance</title>
+        <title>Skylane Short Field Takeoff Performance Calculator</title>
         <script src="scripts/modernizr.js"></script>
-<!--         <script src="scripts/jquery.js"></script> -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+        
+    </head>
+        
 <style>
 
 </style>
@@ -36,6 +40,9 @@ localStorage.setItem("teWarn", "no");
 localStorage.setItem("acWarn", "no");
 
 var airport = localStorage.getItem("airport");
+if (airport == "") {
+var airport = "NOAIRPORT"; 
+}
 var runway = Number(localStorage.getItem("runway"));
 var grossWeight = Number(localStorage.getItem("grossWeight"));
 // var roll = localStorage.getItem("roll");
@@ -58,19 +65,23 @@ jQuery(document).ready(function($) {
   success : function(parsed_json) {
 // check that airport code is valid
   try {
-    if (parsed_json['response']['error']['type'] == "querynotfound") {
+    if (airport=="NOAIRPORT") {
+    }
+    else if (parsed_json['response']['error']['type'] == "querynotfound") {
     confirm("This airport code does not exist. Please re-enter airport code.")
     window.location = "index.html";  
     localStorage.setItem("acWarn", "yes");}
     }
   catch (e) { }
 
+if (airport!="NOAIRPORT") {
   var elevationW = parsed_json['current_observation']['display_location']['elevation'];
   var temp_cW = parsed_json['current_observation']['temp_c'];
   var wind_kphW = parsed_json['current_observation']['wind_kph'];
   var wind_degreesW = parsed_json['current_observation']['wind_degrees'];
   var pressure_inW = parsed_json['current_observation']['pressure_in'];
   var wind_stringW = parsed_json['current_observation']['wind_string'];
+  }
 
 // wind speed for computation
   if (windSpeed != "") {
@@ -302,7 +313,7 @@ function estimate(useObstacle) {
 
 </script>
 
-<h1>Skylane Short Field Takeoff Distance</h1>
+<h1>Skylane Short Field Takeoff Performance Calculator</h1>
 
 <!-- warnings -->
 <div id = "warnGrossWeight"></div>

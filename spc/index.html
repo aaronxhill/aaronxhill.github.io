@@ -6,11 +6,20 @@
     
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
-        <title>Skylane Short Field Takeoff Distance</title>
+        <title>Skylane Short Field Takeoff Performance Calculator</title>
         <script src="scripts/modernizr.js"></script>
-<!--         <script src="scripts/jquery.js"></script> -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+        
+        
         <script>
+//         if (confirm("This performance calculator is for use as an indication and reference tool only. It is your responsibility as the pilot to make sure that the information provided in this application is precise and accurate for your airplane. The application developer does not take responsibility or legal responsibility for inaccurate or misleading information in this takeoff performance calculator. Do you agree to this disclaimer?")) {
+//         }
+//         else {
+//         window.location.href = "deny.html"; 
+//         }
+        
         if (Modernizr.localstorage) {
             
             $(function() {
@@ -62,6 +71,13 @@
 				            e.preventDefault();
 				
             				localStorage.setItem("flag", "");
+            				localStorage.setItem("bpWarn", "no");
+                            localStorage.setItem("wsWarn", "no");
+                            localStorage.setItem("wdWarn", "no");
+                            localStorage.setItem("elWarn", "no");
+                            localStorage.setItem("teWarn", "no");
+                            localStorage.setItem("acWarn", "no");
+
             				location.reload();
 				
 			            });
@@ -78,14 +94,18 @@
 
 <body>
 
-<h1>Skylane Short Field Takeoff Distance</h1>
+<h1>Skylane Short Field Takeoff Performance Calculator</h1>
 
-<h2>Warning about 20 degrees of flaps.</h2>
+<p>This application is for the Skylane model 182T (non-turbocharged) only and is based on data in 
+   the Cessna Information Manual for Skylane 182T Serials 18281869 and 18281876 and On.</p>
+<p>These calculations are based on Short Field technique in Section 4. CONDITIONS: Flaps 20º, 
+   2400RPM, Cowl Flaps Open, Full Throttle and mixture set prior to brake release.</p>
 
 <form id="localStorageTest" method="" action="">
 
-    <label><div id = "acWarn">Airport Code:</label>
-    <input type="text" name="airport" id="airport" class="stored" value="" autocapitalize="characters"/></div>
+<!-- autofocus -->
+    <label><div id = "acWarn"><div class="formHead">Airport Code:</div></label>
+    <input type="text" name="airport" id="airport" class="stored" value="" autocapitalize="characters" /></div>
         <script>
         if (localStorage.getItem("acWarn") == "yes") {
         document.getElementById("acWarn").style.color="red";};
@@ -97,7 +117,7 @@
     <br>
  -->
 
-    <label>Runway Number:</label>
+    <label><div class="formHead">Runway Number:</div></label>
     <select name="runway" id = "runway">
         <option value="1">01</option>
         <option value="2">02</option>
@@ -136,11 +156,9 @@
         <option value="35">35</option>
         <option value="36">36</option>
     </select>
-    <br>
 
-    <label>Gross Weight:</label>
-    <input type="number" name="grossWeight" id="grossWeight" class="stored" value="" />pounds
-    <br>
+    <label><div class="formHead">Gross Weight:</div></label>
+    <input type="number" name="grossWeight" id="grossWeight" class="stored" value="" /><div class="formDescrip">pounds</div>
 
 <!-- 
     <label>Obstacle:</label>
@@ -151,7 +169,7 @@
     <br>
  -->
     
-    <label>Soft Field Takeoff:</label>
+    <label><div class="formHead">Soft Field Takeoff:</div></label>
     <select name="soft" id = "soft">
         <option value="0" selected>no</option>
         <option value="1">yes</option>
@@ -160,44 +178,46 @@
     
     <p>Entering an airport code above will access the latest terminal weather. <br>
     To provide your own data, use any or all of the fields below to supplement it:</p>
-    <label><div id="wsWarn">Wind Speed:</label>
-    <input type="number" name="windSpeed" id="windSpeed" class="stored" value="" />kph</div>
+    <label><div id="wsWarn"><div class="formHead">Wind Speed:</div></label>
+    <input type="number" name="windSpeed" id="windSpeed" class="stored" value="" /><div class="formDescrip">kph</div></div>
         <script>
         if (localStorage.getItem("wsWarn") == "yes") {
         document.getElementById("wsWarn").style.color="red";};
         </script>
         
-    <label><div id = "wdWarn">Wind Direction:</label>
-    <input type="number" name="windDir" id="windDir" class="stored" value="" />degrees</div>
+    <label><div id = "wdWarn"><div class="formHead">Wind Direction:</div></label>
+    <input type="number" name="windDir" id="windDir" class="stored" value="" /><div class="formDescrip">degrees</div></div>
         <script>
         if (localStorage.getItem("wdWarn") == "yes") {
         document.getElementById("wdWarn").style.color="red";};
         </script>
     
-    <label><div id = "elWarn">Elevation:</label>
+    <label><div id = "elWarn"><div class="formHead">Elevation:</div></label>
     <input type="number" name="elevation" id="elevation" class="stored" value="" />
         <script>
         if (localStorage.getItem("elWarn") == "yes") {
         document.getElementById("elWarn").style.color="red";};
         </script>    
+    <div class="formRadio">    
     <input type="radio" name="elev" value="feet" checked>Feet
-    <input type="radio" name="elev" value="meters">Meters</div>
+    <input type="radio" name="elev" value="meters">Meters</div></div>
     
-    <label><div id="bpWarn">Barometric Pressure:</label> 
-    <input type="number" name="pressureIn" id="pressureIn" class="stored" value="" /> in. Hg. </div>
+    <label><div id="bpWarn"><div class="formHead">Barometric Pressure:</div></label> 
+    <input type="number" name="pressureIn" id="pressureIn" class="stored" value="" /> <div class="formDescrip">in. Hg. </div></div>
         <script>
         if (localStorage.getItem("bpWarn") == "yes") {
         document.getElementById("bpWarn").style.color="red";};
         </script>
     
-    <label><div id="teWarn">Temperature:</label>
+    <label><div id="teWarn"><div class="formHead">Temperature:</div></label>
     <input type="number" name="temperature" id="temperature" class="stored" value="" />
         <script>
         if (localStorage.getItem("teWarn") == "yes") {
         document.getElementById("teWarn").style.color="red";};
         </script>
+    <div class="formRadio">
     <input type="radio" name="temp" value="celsius" checked>Celsius
-    <input type="radio" name="temp" value="fahrenheit" >Fahrenheit</div>
+    <input type="radio" name="temp" value="fahrenheit" >Fahrenheit</div></div>
 
     <input id = "Calculate" name="Calculate" class="Calculate-button" type="submit" value="Calculate" />
 </form>
