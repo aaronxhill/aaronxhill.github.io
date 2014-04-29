@@ -85,7 +85,7 @@
 <form id="localStorageTest" method="" action="">
 
     <label><div id = "acWarn">Airport Code:</label>
-    <input type="text" name="airport" id="airport" class="stored" value="" /></div>
+    <input type="text" name="airport" id="airport" class="stored" value="" autocapitalize="characters"/></div>
         <script>
         if (localStorage.getItem("acWarn") == "yes") {
         document.getElementById("acWarn").style.color="red";};
