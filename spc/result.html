@@ -10,7 +10,7 @@ TODO:
     <head>
     
         <meta charset="utf-8">
-        <title>Skylane Performance Calculator</title>
+        <title>Skylane Short Field Takeoff Distance</title>
         <script src="scripts/modernizr.js"></script>
 <!--         <script src="scripts/jquery.js"></script> -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -257,7 +257,7 @@ function estimate() {
   if (temperature != "") {
   $('#temp').html("Temperature Unit: "+temp); }
   
-  $('#elevationW').html("Elevation: "+elevationW); 
+  $('#elevationW').html("Elevation: "+elevationW+" meters"); 
   $('#temp_cW').html("Temp(C): "+temp_cW); 
   $('#wind_kphW').html("Wind Speed (kph): "+wind_kphW); 
   $('#wind_degreesW').html("Wind Direction: "+wind_degreesW); 
@@ -287,11 +287,12 @@ function estimate() {
   $('#paWarn').html(paWarn);
 
   if (useObstacle == 1) {
-  $('#finalEstimate').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimate);
-  $('#KIASfiftyft').html("KIAS (50 foot obstacle): "+KIASfiftyft);}
+  $('#finalEstimate').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimate);}
   else {
-  $('#finalEstimate').html("GROUND ROLL (IN FEET): "+finalEstimate);
-  $('#KIASliftoff').html("KIAS (liftoff): "+KIASliftoff);}
+  $('#finalEstimate').html("GROUND ROLL (IN FEET): "+finalEstimate);}
+
+  $('#KIASfiftyft').html("Speed at 50 feet: "+KIASfiftyft+" KIAS");
+  $('#KIASliftoff').html("Speed at liftoff: "+KIASliftoff+" KIAS");
   
   }
     });;
@@ -299,7 +300,7 @@ function estimate() {
 
 </script>
 
-<h1>Skylane Performance Calculator</h1>
+<h1>Skylane Short Field Takeoff Distance</h1>
 
 <!-- warnings -->
 <div id = "warnGrossWeight"></div>
