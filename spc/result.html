@@ -1,0 +1,360 @@
+<!-- 
+TODO: 
+  Form validation
+ -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+    
+        <meta charset="utf-8">
+        <title>Skylane Performance Calculator</title>
+        <script src="scripts/modernizr.js"></script>
+<!--         <script src="scripts/jquery.js"></script> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<style>
+
+</style>
+
+
+<body>
+
+<p>
+<a href="index.html">home</a></p>
+
+<script>
+localStorage.setItem("bpWarn", "no");
+localStorage.setItem("wsWarn", "no");
+localStorage.setItem("wdWarn", "no");
+localStorage.setItem("elWarn", "no");
+localStorage.setItem("teWarn", "no");
+localStorage.setItem("acWarn", "no");
+
+var airport = localStorage.getItem("airport");
+var runway = Number(localStorage.getItem("runway"));
+var grossWeight = Number(localStorage.getItem("grossWeight"));
+var roll = localStorage.getItem("roll");
+var soft = localStorage.getItem("soft");
+
+var windSpeed = Number(localStorage.getItem("windSpeed"));
+var windDir = Number(localStorage.getItem("windDir"));
+var elevation = Number(localStorage.getItem("elevation"));
+var elev = localStorage.getItem("elev");
+var pressureIn = Number(localStorage.getItem("pressureIn"));
+var temperature = Number(localStorage.getItem("temperature"));
+var temp = localStorage.getItem("temp");
+
+var weather_raw_url = "http://api.wunderground.com/api/684523e8c92d6cd6/conditions/q/" + airport + ".json";
+
+jQuery(document).ready(function($) {
+  $.ajax({
+  url : weather_raw_url,
+  dataType : "jsonp",
+  success : function(parsed_json) {
+// check that airport code is valid
+  try {
+    if (parsed_json['response']['error']['type'] == "querynotfound") {
+    confirm("This airport code does not exist. Please re-enter airport code.")
+    window.location = "index.html";  
+    localStorage.setItem("acWarn", "yes");}
+    }
+  catch (e) { }
+
+  var elevationW = parsed_json['current_observation']['display_location']['elevation'];
+  var temp_cW = parsed_json['current_observation']['temp_c'];
+  var wind_kphW = parsed_json['current_observation']['wind_kph'];
+  var wind_degreesW = parsed_json['current_observation']['wind_degrees'];
+  var pressure_inW = parsed_json['current_observation']['pressure_in'];
+  var wind_stringW = parsed_json['current_observation']['wind_string'];
+
+// wind speed for computation
+  if (windSpeed != "") {
+  var useWindSpeed = Number(windSpeed);}
+  else if (wind_kphW != "") {
+  var useWindSpeed = Number(wind_kphW);}
+  else {
+  confirm("Wind speed is not available from the terminal weather database. Please provide the wind speed.")
+  window.location = "index.html";
+  localStorage.setItem("wsWarn", "yes");
+  }
+
+// wind direction for computation
+  if (windDir != "") {
+  var useWindDir = Number(windDir);}
+  else if (wind_degreesW != "") {
+  var useWindDir = Number(wind_degreesW);}
+  else {
+  confirm("Wind direction is not available from the terminal weather database. Please provide the wind direction.")
+  window.location = "index.html";
+  localStorage.setItem("wdWarn", "yes");
+  }
+
+// runway_number for computation
+  var useRunwayNumber = Number(runway) * 10;
+  
+// weight for computation
+  var useGrossWeight = Number(grossWeight); 
+  if (useGrossWeight > 3099) {
+  var useGrossWeight = 3099; 
+    if (Number(grossWeight) > 3099) {
+    var warnGrossWeight = "WARNING: maximum gross weight is 3100 pounds. You entered " + grossWeight + " pounds! The estimate provided is based on a weight of 3,100 pounds"}
+  }
+  
+// roll for computation
+  var useObstacle = Number(roll); 
+
+// soft for computation
+  var useSoft = Number(soft); 
+  
+// elevation used for computation
+  if (elevation != "") {
+    if (elev == "feet") {
+    var useElevation = Number(elevation);}
+    else {var useElevation = Math.round(Number(elevation) * 3.28084);}
+  }
+  else if (elevationW != "") {
+  var useElevation = Math.round(Number(elevationW) * 3.28084);}
+  else {
+  confirm("Elevation is not available from the terminal weather database. Please provide the elevation.")
+  window.location = "index.html";
+  localStorage.setItem("elWarn", "yes");
+  }
+
+// barometric pressure for computation
+  if (pressureIn != "") {
+  usePressure = Number(pressureIn);}
+  else if (pressure_inW != "") {
+  usePressure = Number(pressure_inW);}
+  else {
+  confirm("Barometric pressure is not available from the terminal weather database. Please provide the barometric pressure.")
+  window.location = "index.html";
+  localStorage.setItem("bpWarn", "yes");
+  }
+  
+// temperature used for computation
+  if (temperature != "") {
+    if (temp == "celsius") {
+    var useTemperature = Number(temperature);}
+    else {var useTemperature = Math.ceil(Number(temperature) - 32) * 5/9;}
+  }
+  else if (temp_cW != "") {
+  var useTemperature = Number(temp_cW);}
+  else {
+  confirm("Temperature is not available from the terminal weather database. Please provide the temperature.")
+  window.location = "index.html";
+  localStorage.setItem("teWarn", "yes");
+  }
+  if (useTemperature < 0) {
+  var warnTemperature = "NOTE: The temperature is " + useTemperature + "(C) but the temperature used for computing the estimate is 0(C)."
+  var useTemperature = 0; 
+  }
+  
+// COMPUTE crosswind component
+  var crosswindComp = Math.abs(Math.sin((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed);
+  if (crosswindComp > 15) {
+  var warnCrosswindComp = "WARNING: crosswind component exceeds maximum demonstrated performance for this aircraft. Crosswind component is "+ crosswindComp + " knots"; 
+  }
+
+// COMPUTE headwind component
+  var headwindComp  = Math.abs(Math.cos((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed); 
+
+// COMPUTE pressure altitude
+  var pa_act = useElevation - ((usePressure - 29.92) * 1000);
+  if (pa_act < 0) {
+  var paWarn = "NOTE: The actual pressure altitude is " + pa_act + ", but the value used to compute the final estimate is 0."; 
+  var pa_act = 0; 
+  } 
+
+// Variables for computation
+  var sfp = 0.20;
+  var hb = 0.009;
+
+  var x = [[[[365, 705], [390, 750], [420, 800], [450, 850], [480, 905]], [[395, 765], [425, 815], [455, 870], [490, 925], [520, 985]], [[430, 830], [460, 885], [495, 940], [530, 1005], [565, 1070]], [[470, 900], [505, 960], [540, 1025], [580, 1090], [620, 1165]]], 
+    [[[520, 995], [560, 1065], [600, 1135], [645, 1215], [690, 1295]], [[565, 1080], [610, 1155], [655, 1235], [700, 1320], [750, 1410]], [[615, 1180], [665, 1260], [710, 1350], [765, 1445], [820, 1545]], [[675, 1285], [725, 1380], [775, 1480], [835, 1585], [895, 1695]]], 
+    [[[715, 1365], [765, 1460], [825, 1570], [885, 1680], [945, 1800]], [[775, 1490], [835, 1600], [900, 1720], [965, 1845], [1030, 1980]], [[850, 1635], [915, 1760], [980, 1890], [1055, 2035], [1130, 2190]], [[925, 1800], [995, 1940], [1070, 2090], [1150, 2255], [1235, 2435]]]];
+
+  var pounds = [2300, 2700, 3100];
+  var pa = [0, 1000, 2000, 3000];
+  var temps = [0, 10, 20, 30, 40];
+  var obstacle = [0, 1];
+
+  var KIAS_liftoff = [42, 45, 49];
+  var KIAS_fiftyft = [50, 54, 58];
+
+  var pounds_i = Math.floor((useGrossWeight-2300) / 400);
+  var pa_i = Math.floor(pa_act / 1000);
+  var temp_i = Math.floor(useTemperature / 10);
+
+  var pounds_m = (useGrossWeight - pounds[pounds_i]) / 400;
+  var pa_m = (pa_act - pa[pa_i]) / 1000;
+  var temp_m = (useTemperature - temps[temp_i]) / 10;
+  
+  var KIASliftoff = KIAS_liftoff[pounds_i] + ((KIAS_liftoff[pounds_i+1] - KIAS_liftoff[pounds_i]) * pounds_m);
+  var KIASfiftyft = KIAS_fiftyft[pounds_i] + ((KIAS_fiftyft[pounds_i+1] - KIAS_fiftyft[pounds_i]) * pounds_m);
+
+// Functions for computation
+
+function feet(remove_o) {
+    var obs = useObstacle - remove_o; 
+    var one = [x[pounds_i][pa_i][temp_i][obs], x[pounds_i][pa_i][temp_i+1][obs],
+           x[pounds_i][pa_i+1][temp_i][obs], x[pounds_i][pa_i+1][temp_i+1][obs],
+           x[pounds_i+1][pa_i][temp_i][obs], x[pounds_i+1][pa_i][temp_i+1][obs],
+           x[pounds_i+1][pa_i+1][temp_i][obs], x[pounds_i+1][pa_i+1][temp_i+1][obs]]; 
+
+    var two = [one[0]+(one[1]-one[0])*temp_m, one[2]+(one[3]-one[2])*temp_m, 
+           one[4]+(one[5]-one[4])*temp_m, one[6]+(one[7]-one[6])*temp_m];
+
+    var three = [two[0]+(two[1]-two[0])*pa_m, two[2]+(two[3]-two[2])*pa_m];
+
+    var four = three[0] + (three[1] - three[0]) * pounds_m;
+    return four
+    }
+
+function estimate() {
+    if (useObstacle + useSoft == 2) {
+        return feet(0) + feet(1) * sfp - (feet(0) + feet(1) * sfp) * (hb * headwindComp)}
+    else if (useSoft == 1) {
+        return feet(0) + feet(0) * sfp - (feet(0) + feet(0) * sfp) * (hb * headwindComp)}
+    else { 
+        return feet(0) - (feet(0) * (hb * headwindComp))}
+    }
+
+// ESTIMATE ELEMENTS
+  var Est1 = Math.round(feet(0));
+  var Est2 = Math.round(Math.abs(estimate() - estimate() / (1 - 0.0111111 * headwindComp)) + estimate() - feet(0));
+  var Est3 = Math.round(estimate() - estimate() / (1 - 0.0111111 * headwindComp));
+
+// FINAL ESTIMATE
+  var finalEstimate = Math.round(estimate());
+
+// return to divs  
+  $('#airport').html("Airport Code: "+airport); 
+  $('#runway').html("Runway Number: "+runway); 
+  $('#grossWeight').html("Gross Weight: "+grossWeight); 
+  if (roll == 1) {
+  $('#roll').html("Obstacle: distance to clear 50 foot obstacle");}
+  else { 
+  $('#roll').html("Obstacle: ground roll"); }
+  if (soft == 1) {
+  $('#soft').html("Soft Field: yes");}
+  else {
+  $('#soft').html("Soft Field: no");}
+  
+  if (windSpeed != "") {
+  $('#windSpeed').html("Wind Speed: "+windSpeed); }
+  if (windDir != "") {
+  $('#windDir').html("Wind Direction "+windDir); }
+  if (elevation != "") {
+  $('#elevation').html("Elevation: "+elevation); }
+  if (elevation != "") {
+  $('#elev').html("Elevation Unit: "+elev); }
+  if (pressureIn != "") {
+  $('#pressureIn').html("Barometric Pressure: "+pressureIn); }
+  if (temperature != "") {
+  $('#temperature').html("Temperature: "+temperature); }
+  if (temperature != "") {
+  $('#temp').html("Temperature Unit: "+temp); }
+  
+  $('#elevationW').html("Elevation: "+elevationW); 
+  $('#temp_cW').html("Temp(C): "+temp_cW); 
+  $('#wind_kphW').html("Wind Speed (kph): "+wind_kphW); 
+  $('#wind_degreesW').html("Wind Direction: "+wind_degreesW); 
+  $('#pressure_inW').html("Barometric Pressure: "+pressure_inW); 
+  $('#wind_stringW').html("Weather Report: "+wind_stringW); 
+
+  $('#useRunwayNumber').html("Runway Degrees: "+useRunwayNumber); 
+  $('#useGrossWeight').html("Gross Weight: "+useGrossWeight); 
+  $('#useObstacle').html("Obstacle: "+useObstacle); 
+  $('#useSoft').html("Soft Field Takeoff: "+useSoft); 
+  $('#useWindSpeed').html("Wind Speed: "+useWindSpeed); 
+  $('#useWindDir').html("Wind Direction: "+useWindDir); 
+  $('#useElevation').html("Elevation: "+useElevation); 
+  $('#usePressure').html("Barometric Pressure: "+usePressure); 
+  $('#useTemperature').html("Temperature: "+useTemperature); 
+  
+  $('#crosswindComp').html("Crosswind component: "+crosswindComp);
+  $('#headwindComp').html("Headwind component: "+headwindComp);
+  $('#pa_act').html("Pressure altitude: "+pa_act);
+  $('#Est1').html("Estimate without adjustment for soft field or headwind component: "+Est1);
+  $('#Est2').html("Adjustment for soft field: "+Est2);
+  $('#Est3').html("Adjustment for headwind component: "+Est3);
+  
+  $('#warnGrossWeight').html(warnGrossWeight);
+  $('#warnTemperature').html(warnTemperature);
+  $('#warnCrosswindComp').html(warnCrosswindComp);
+  $('#paWarn').html(paWarn);
+
+  if (useObstacle == 1) {
+  $('#finalEstimate').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimate);
+  $('#KIASfiftyft').html("KIAS (50 foot obstacle): "+KIASfiftyft);}
+  else {
+  $('#finalEstimate').html("GROUND ROLL (IN FEET): "+finalEstimate);
+  $('#KIASliftoff').html("KIAS (liftoff): "+KIASliftoff);}
+  
+  }
+    });;
+});
+
+</script>
+
+<h1>Skylane Performance Calculator</h1>
+
+<!-- warnings -->
+<div id = "warnGrossWeight"></div>
+<div id = "warnCrosswindComp"></div>
+
+<!-- notes -->
+<div id = "warnTemperature"></div>
+<div id = "paWarn"></div>
+
+<h2>Self Reported</h2>
+<div id = "airport"></div>
+<div id = "runway"></div>
+<div id = "grossWeight"></div>
+<div id = "roll"></div>
+<div id = "noSoft"></div>
+<div id = "soft"></div>
+<div id = "windSpeed"></div>
+<div id = "windDir"></div>
+<div id = "elevation"></div>
+<div id = "elev"></div>
+<div id = "pressureIn"></div>
+<div id = "temperature"></div>
+<div id = "temp"></div>
+
+<h2>Weather Underground</h2>
+<div id = "elevationW"></div>
+<div id = "temp_cW"></div>
+<div id = "wind_kphW"></div>
+<div id = "wind_degreesW"></div>
+<div id = "pressure_inW"></div>
+<div id = "wind_stringW"></div>
+
+<h2>Adjusted Inputs</h2>
+<div id = "useRunwayNumber"></div>
+<div id = "useGrossWeight"></div>
+<div id = "useObstacle"></div>
+<div id = "useSoft"></div>
+<div id = "useWindSpeed"></div>
+<div id = "useWindDir"></div>
+<div id = "useElevation"></div>
+<div id = "usePressure"></div>
+<div id = "useTemperature"></div>
+
+<h2>Computations</h2>
+<div id = "crosswindComp"></div>
+<div id = "headwindComp"></div>
+<div id = "pa_act"></div>
+<div id = "Est1"></div>
+<div id = "Est2"></div>
+<div id = "Est3"></div>
+
+<h2>Final Estimate</h2>
+<div id = "finalEstimate"></div>
+<div id = "KIASliftoff"></div>
+<div id = "KIASfiftyft"></div>
+
+</body>
+</html>

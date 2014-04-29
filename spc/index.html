@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+    
+        <meta charset="utf-8">
+        <title>Skylane Performance Calculator</title>
+        <script src="scripts/modernizr.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script>
+        if (Modernizr.localstorage) {
+            
+            $(function() {
+                            
+                $("#Calculate")
+                    .after("<input type='submit' value='Clear' id='clearData'>")
+                    .click(function(e) {
+                    
+                        e.preventDefault();
+
+				        // Bit of generic data to test if saved data exists on page load
+        				localStorage.setItem("flag", "set");
+				                        
+                        var data = $("#localStorageTest").serializeArray();
+                        
+                        $.each(data, function(i, obj) {
+                            localStorage.setItem(obj.name, obj.value);
+                        });
+                        
+                        var roll = document.getElementById('roll').value; 
+                        localStorage.setItem('roll', roll);
+
+                        var soft = document.getElementById('soft').value; 
+                        localStorage.setItem('soft', soft);
+                        
+                        var runway = document.getElementById('runway').value; 
+                        localStorage.setItem('runway', runway);                                                
+                        
+                        onSubmit=window.location='result.html'
+
+                    });
+                    
+		            // Test if there is already saved data	
+		            if (localStorage.getItem("flag") == "set") {
+			
+        			// Same iteration stuff as before
+		        	var data = $("#localStorageTest").serializeArray();
+			
+			        // Only the only way we can select is by the name attribute, but jQuery is down with that.
+			        $.each(data, function(i, obj) {
+				        $("[name='" + obj.name +"']").val(localStorage.getItem(obj.name));
+			        });
+		            }
+
+                    // Provide mechanism to remove data. You'd probably actually remove it not just kill the flag
+            		$("#clearData")
+			            .click(function(e) {
+				
+				            e.preventDefault();
+				
+            				localStorage.setItem("flag", "");
+            				location.reload();
+				
+			            });
+            });
+        }
+                
+        </script>
+    </head>
+
+<style>
+
+</style>
+
+
+<body>
+
+<h1>Skylane Performance Calculator</h1>
+
+<form id="localStorageTest" method="" action="">
+
+    <label><div id = "acWarn">Airport Code:</label>
+    <input type="text" name="airport" id="airport" class="stored" value="" /></div>
+        <script>
+        if (localStorage.getItem("acWarn") == "yes") {
+        document.getElementById("acWarn").style.color="red";};
+        </script>
+
+<!-- 
+    <label>Runway Number:</label>
+    <input type="number" name="runway" id="runway" class="stored" value="" />(for now, enter Runway 35 as "350")
+    <br>
+ -->
+
+    <label>Runway Number:</label>
+    <select name="runway" id = "runway">
+        <option value="1">01</option>
+        <option value="2">02</option>
+        <option value="3">03</option>
+        <option value="4">04</option>
+        <option value="5">05</option>
+        <option value="6">06</option>
+        <option value="7">07</option>
+        <option value="8">08</option>
+        <option value="9">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+    </select>
+    <br>
+
+    <label>Gross Weight:</label>
+    <input type="number" name="grossWeight" id="grossWeight" class="stored" value="" />pounds
+    <br>
+
+    <label>Obstacle:</label>
+    <select name = "roll" id = "roll">
+        <option value="0" selected>ground roll</option>
+        <option value="1">distance to clear 50 foot obstacle</option>
+    </select>
+    <br>
+    
+    <label>Soft Field Takeoff:</label>
+    <select name="soft" id = "soft">
+        <option value="0" selected>no</option>
+        <option value="1">yes</option>
+    </select>
+    <br>
+    
+    <p>Entering an airport code above will access the latest terminal weather. <br>
+    To provide your own data, use any or all of the fields below to supplement it:</p>
+    <label><div id="wsWarn">Wind Speed:</label>
+    <input type="number" name="windSpeed" id="windSpeed" class="stored" value="" />kph</div>
+        <script>
+        if (localStorage.getItem("wsWarn") == "yes") {
+        document.getElementById("wsWarn").style.color="red";};
+        </script>
+        
+    <label><div id = "wdWarn">Wind Direction:</label>
+    <input type="number" name="windDir" id="windDir" class="stored" value="" />degrees</div>
+        <script>
+        if (localStorage.getItem("wdWarn") == "yes") {
+        document.getElementById("wdWarn").style.color="red";};
+        </script>
+    
+    <label><div id = "elWarn">Elevation:</label>
+    <input type="number" name="elevation" id="elevation" class="stored" value="" />
+        <script>
+        if (localStorage.getItem("elWarn") == "yes") {
+        document.getElementById("elWarn").style.color="red";};
+        </script>    
+    <input type="radio" name="elev" value="feet" checked>Feet
+    <input type="radio" name="elev" value="meters">Meters</div>
+    
+    <label><div id="bpWarn">Barometric Pressure:</label> 
+    <input type="number" name="pressureIn" id="pressureIn" class="stored" value="" /> in. Hg. </div>
+        <script>
+        if (localStorage.getItem("bpWarn") == "yes") {
+        document.getElementById("bpWarn").style.color="red";};
+        </script>
+    
+    <label><div id="teWarn">Temperature:</label>
+    <input type="number" name="temperature" id="temperature" class="stored" value="" />
+        <script>
+        if (localStorage.getItem("teWarn") == "yes") {
+        document.getElementById("teWarn").style.color="red";};
+        </script>
+    <input type="radio" name="temp" value="celsius" checked>Celsius
+    <input type="radio" name="temp" value="fahrenheit" >Fahrenheit</div>
+
+    <input id = "Calculate" name="Calculate" class="Calculate-button" type="submit" value="Calculate" />
+</form>
+
+<p>
+<a href="result.html">Go to most recent result</a>
+</p>
+
+</body>
+</html>
