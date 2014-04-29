@@ -1,6 +1,8 @@
 <!-- 
 TODO: 
   Form validation
+  ios 7
+  show both with and without obstacle (no form entry)
  -->
 
 <!DOCTYPE html>
@@ -10,6 +12,7 @@ TODO:
     <head>
     
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
         <title>Skylane Short Field Takeoff Distance</title>
         <script src="scripts/modernizr.js"></script>
 <!--         <script src="scripts/jquery.js"></script> -->
@@ -35,7 +38,7 @@ localStorage.setItem("acWarn", "no");
 var airport = localStorage.getItem("airport");
 var runway = Number(localStorage.getItem("runway"));
 var grossWeight = Number(localStorage.getItem("grossWeight"));
-var roll = localStorage.getItem("roll");
+// var roll = localStorage.getItem("roll");
 var soft = localStorage.getItem("soft");
 
 var windSpeed = Number(localStorage.getItem("windSpeed"));
@@ -103,7 +106,7 @@ jQuery(document).ready(function($) {
   }
   
 // roll for computation
-  var useObstacle = Number(roll); 
+//   var useObstacle = Number(roll); 
 
 // soft for computation
   var useSoft = Number(soft); 
@@ -191,12 +194,12 @@ jQuery(document).ready(function($) {
   var pa_m = (pa_act - pa[pa_i]) / 1000;
   var temp_m = (useTemperature - temps[temp_i]) / 10;
   
-  var KIASliftoff = KIAS_liftoff[pounds_i] + ((KIAS_liftoff[pounds_i+1] - KIAS_liftoff[pounds_i]) * pounds_m);
-  var KIASfiftyft = KIAS_fiftyft[pounds_i] + ((KIAS_fiftyft[pounds_i+1] - KIAS_fiftyft[pounds_i]) * pounds_m);
+  var KIASliftoff = Math.round(KIAS_liftoff[pounds_i] + ((KIAS_liftoff[pounds_i+1] - KIAS_liftoff[pounds_i]) * pounds_m));
+  var KIASfiftyft = Math.round(KIAS_fiftyft[pounds_i] + ((KIAS_fiftyft[pounds_i+1] - KIAS_fiftyft[pounds_i]) * pounds_m));
 
 // Functions for computation
 
-function feet(remove_o) {
+function feet(remove_o, useObstacle) {
     var obs = useObstacle - remove_o; 
     var one = [x[pounds_i][pa_i][temp_i][obs], x[pounds_i][pa_i][temp_i+1][obs],
            x[pounds_i][pa_i+1][temp_i][obs], x[pounds_i][pa_i+1][temp_i+1][obs],
@@ -212,22 +215,23 @@ function feet(remove_o) {
     return four
     }
 
-function estimate() {
+function estimate(useObstacle) {
     if (useObstacle + useSoft == 2) {
-        return feet(0) + feet(1) * sfp - (feet(0) + feet(1) * sfp) * (hb * headwindComp)}
+        return feet(0, useObstacle) + feet(1, useObstacle) * sfp - (feet(0, useObstacle) + feet(1, useObstacle) * sfp) * (hb * headwindComp)}
     else if (useSoft == 1) {
-        return feet(0) + feet(0) * sfp - (feet(0) + feet(0) * sfp) * (hb * headwindComp)}
+        return feet(0, useObstacle) + feet(0, useObstacle) * sfp - (feet(0, useObstacle) + feet(0, useObstacle) * sfp) * (hb * headwindComp)}
     else { 
-        return feet(0) - (feet(0) * (hb * headwindComp))}
+        return feet(0, useObstacle) - (feet(0, useObstacle) * (hb * headwindComp))}
     }
 
 // ESTIMATE ELEMENTS
-  var Est1 = Math.round(feet(0));
-  var Est2 = Math.round(Math.abs(estimate() - estimate() / (1 - 0.0111111 * headwindComp)) + estimate() - feet(0));
-  var Est3 = Math.round(estimate() - estimate() / (1 - 0.0111111 * headwindComp));
+//   var Est1 = Math.round(feet(0));
+//   var Est2 = Math.round(Math.abs(estimate() - estimate() / (1 - 0.0111111 * headwindComp)) + estimate() - feet(0));
+//   var Est3 = Math.round(estimate() - estimate() / (1 - 0.0111111 * headwindComp));
 
 // FINAL ESTIMATE
-  var finalEstimate = Math.round(estimate());
+  var finalEstimateGr = Math.round(estimate(0));
+  var finalEstimateOb = Math.round(estimate(1));
 
 // return to divs  
   $('#airport').html("Airport Code: "+airport); 
@@ -266,7 +270,7 @@ function estimate() {
 
   $('#useRunwayNumber').html("Runway Degrees: "+useRunwayNumber); 
   $('#useGrossWeight').html("Gross Weight: "+useGrossWeight); 
-  $('#useObstacle').html("Obstacle: "+useObstacle); 
+//   $('#useObstacle').html("Obstacle: "+useObstacle); 
   $('#useSoft').html("Soft Field Takeoff: "+useSoft); 
   $('#useWindSpeed').html("Wind Speed: "+useWindSpeed); 
   $('#useWindDir').html("Wind Direction: "+useWindDir); 
@@ -277,19 +281,17 @@ function estimate() {
   $('#crosswindComp').html("Crosswind component: "+crosswindComp);
   $('#headwindComp').html("Headwind component: "+headwindComp);
   $('#pa_act').html("Pressure altitude: "+pa_act);
-  $('#Est1').html("Estimate without adjustment for soft field or headwind component: "+Est1);
-  $('#Est2').html("Adjustment for soft field: "+Est2);
-  $('#Est3').html("Adjustment for headwind component: "+Est3);
+//   $('#Est1').html("Estimate without adjustment for soft field or headwind component: "+Est1);
+//   $('#Est2').html("Adjustment for soft field: "+Est2);
+//   $('#Est3').html("Adjustment for headwind component: "+Est3);
   
   $('#warnGrossWeight').html(warnGrossWeight);
   $('#warnTemperature').html(warnTemperature);
   $('#warnCrosswindComp').html(warnCrosswindComp);
   $('#paWarn').html(paWarn);
 
-  if (useObstacle == 1) {
-  $('#finalEstimate').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimate);}
-  else {
-  $('#finalEstimate').html("GROUND ROLL (IN FEET): "+finalEstimate);}
+  $('#finalEstimateOb').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimateOb);
+  $('#finalEstimateGr').html("GROUND ROLL (IN FEET): "+finalEstimateGr);
 
   $('#KIASfiftyft').html("Speed at 50 feet: "+KIASfiftyft+" KIAS");
   $('#KIASliftoff').html("Speed at liftoff: "+KIASliftoff+" KIAS");
@@ -310,6 +312,20 @@ function estimate() {
 <div id = "warnTemperature"></div>
 <div id = "paWarn"></div>
 
+<h2>Final Estimate</h2>
+<div id = "KIASliftoff"></div>
+<div id = "KIASfiftyft"></div>
+<div id = "finalEstimateGr"></div>
+<div id = "finalEstimateOb"></div>
+
+<h2>Weather Underground</h2>
+<div id = "elevationW"></div>
+<div id = "temp_cW"></div>
+<div id = "wind_kphW"></div>
+<div id = "wind_degreesW"></div>
+<div id = "pressure_inW"></div>
+<div id = "wind_stringW"></div>
+
 <h2>Self Reported</h2>
 <div id = "airport"></div>
 <div id = "runway"></div>
@@ -325,18 +341,10 @@ function estimate() {
 <div id = "temperature"></div>
 <div id = "temp"></div>
 
-<h2>Weather Underground</h2>
-<div id = "elevationW"></div>
-<div id = "temp_cW"></div>
-<div id = "wind_kphW"></div>
-<div id = "wind_degreesW"></div>
-<div id = "pressure_inW"></div>
-<div id = "wind_stringW"></div>
-
 <h2>Adjusted Inputs</h2>
 <div id = "useRunwayNumber"></div>
 <div id = "useGrossWeight"></div>
-<div id = "useObstacle"></div>
+<!-- <div id = "useObstacle"></div> -->
 <div id = "useSoft"></div>
 <div id = "useWindSpeed"></div>
 <div id = "useWindDir"></div>
@@ -348,14 +356,9 @@ function estimate() {
 <div id = "crosswindComp"></div>
 <div id = "headwindComp"></div>
 <div id = "pa_act"></div>
-<div id = "Est1"></div>
-<div id = "Est2"></div>
-<div id = "Est3"></div>
-
-<h2>Final Estimate</h2>
-<div id = "finalEstimate"></div>
-<div id = "KIASliftoff"></div>
-<div id = "KIASfiftyft"></div>
+<!-- <div id = "Est1"></div> -->
+<!-- <div id = "Est2"></div> -->
+<!-- <div id = "Est3"></div> -->
 
 </body>
 </html>

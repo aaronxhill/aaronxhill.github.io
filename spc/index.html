@@ -5,6 +5,7 @@
     <head>
     
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
         <title>Skylane Short Field Takeoff Distance</title>
         <script src="scripts/modernizr.js"></script>
 <!--         <script src="scripts/jquery.js"></script> -->
@@ -29,8 +30,8 @@
                             localStorage.setItem(obj.name, obj.value);
                         });
                         
-                        var roll = document.getElementById('roll').value; 
-                        localStorage.setItem('roll', roll);
+//                         var roll = document.getElementById('roll').value; 
+//                         localStorage.setItem('roll', roll);
 
                         var soft = document.getElementById('soft').value; 
                         localStorage.setItem('soft', soft);
@@ -141,12 +142,14 @@
     <input type="number" name="grossWeight" id="grossWeight" class="stored" value="" />pounds
     <br>
 
+<!-- 
     <label>Obstacle:</label>
     <select name = "roll" id = "roll">
         <option value="0" selected>ground roll</option>
         <option value="1">distance to clear 50 foot obstacle</option>
     </select>
     <br>
+ -->
     
     <label>Soft Field Takeoff:</label>
     <select name="soft" id = "soft">
