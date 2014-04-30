@@ -39,9 +39,6 @@
                             localStorage.setItem(obj.name, obj.value);
                         });
                         
-//                         var roll = document.getElementById('roll').value; 
-//                         localStorage.setItem('roll', roll);
-
                         var soft = document.getElementById('soft').value; 
                         localStorage.setItem('soft', soft);
                         
@@ -103,6 +100,7 @@
 
 <form id="localStorageTest" method="" action="">
 
+<fieldset>
 <!-- autofocus -->
     <label><div id = "acWarn"><div class="formHead">Airport Code:</div></label>
     <input type="text" name="airport" id="airport" class="stored" value="" autocapitalize="characters" /></div>
@@ -110,13 +108,9 @@
         if (localStorage.getItem("acWarn") == "yes") {
         document.getElementById("acWarn").style.color="red";};
         </script>
+</fieldset>
 
-<!-- 
-    <label>Runway Number:</label>
-    <input type="number" name="runway" id="runway" class="stored" value="" />(for now, enter Runway 35 as "350")
-    <br>
- -->
-
+<fieldset>
     <label><div class="formHead">Runway Number:</div></label>
     <select name="runway" id = "runway">
         <option value="1">01</option>
@@ -156,42 +150,43 @@
         <option value="35">35</option>
         <option value="36">36</option>
     </select>
+</fieldset>
 
+<fieldset>
     <label><div class="formHead">Gross Weight:</div></label>
     <input type="number" name="grossWeight" id="grossWeight" class="stored" value="" /><div class="formDescrip">pounds</div>
+</fieldset>
 
-<!-- 
-    <label>Obstacle:</label>
-    <select name = "roll" id = "roll">
-        <option value="0" selected>ground roll</option>
-        <option value="1">distance to clear 50 foot obstacle</option>
-    </select>
-    <br>
- -->
-    
+<fieldset>    
     <label><div class="formHead">Soft Field Takeoff:</div></label>
     <select name="soft" id = "soft">
         <option value="0" selected>no</option>
         <option value="1">yes</option>
     </select>
-    <br>
+</fieldset>
     
     <p>Entering an airport code above will access the latest terminal weather. <br>
     To provide your own data, use any or all of the fields below to supplement it:</p>
+
+<fieldset>
     <label><div id="wsWarn"><div class="formHead">Wind Speed:</div></label>
     <input type="number" name="windSpeed" id="windSpeed" class="stored" value="" /><div class="formDescrip">kph</div></div>
         <script>
         if (localStorage.getItem("wsWarn") == "yes") {
         document.getElementById("wsWarn").style.color="red";};
         </script>
-        
+</fieldset>
+
+<fieldset>        
     <label><div id = "wdWarn"><div class="formHead">Wind Direction:</div></label>
     <input type="number" name="windDir" id="windDir" class="stored" value="" /><div class="formDescrip">degrees</div></div>
         <script>
         if (localStorage.getItem("wdWarn") == "yes") {
         document.getElementById("wdWarn").style.color="red";};
         </script>
-    
+</fieldset>    
+
+<fieldset>
     <label><div id = "elWarn"><div class="formHead">Elevation:</div></label>
     <input type="number" name="elevation" id="elevation" class="stored" value="" />
         <script>
@@ -201,14 +196,18 @@
     <div class="formRadio">    
     <input type="radio" name="elev" value="feet" checked>Feet
     <input type="radio" name="elev" value="meters">Meters</div></div>
-    
+</fieldset>
+
+<fieldset>    
     <label><div id="bpWarn"><div class="formHead">Barometric Pressure:</div></label> 
     <input type="number" name="pressureIn" id="pressureIn" class="stored" value="" /> <div class="formDescrip">in. Hg. </div></div>
         <script>
         if (localStorage.getItem("bpWarn") == "yes") {
         document.getElementById("bpWarn").style.color="red";};
         </script>
-    
+</fieldset>
+
+<fieldset>    
     <label><div id="teWarn"><div class="formHead">Temperature:</div></label>
     <input type="number" name="temperature" id="temperature" class="stored" value="" />
         <script>
@@ -218,6 +217,7 @@
     <div class="formRadio">
     <input type="radio" name="temp" value="celsius" checked>Celsius
     <input type="radio" name="temp" value="fahrenheit" >Fahrenheit</div></div>
+</fieldset>
 
     <input id = "Calculate" name="Calculate" class="Calculate-button" type="submit" value="Calculate" />
 </form>

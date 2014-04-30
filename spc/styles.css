@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     height: 100%;
     width: 320px; 
 /*     width: 480px;  */
@@ -44,4 +44,10 @@ input[type="number"] {
 select {
     font-size: 250%;
     font-family: 'News Cycle', sans-serif; 
+}
+
+fieldset {
+    margin: 0; 
+    padding: 0;
+    border: none; 
 }
