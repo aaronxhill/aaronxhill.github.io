@@ -21,7 +21,7 @@ input[type="text"] {
 
 input[type="number"] { 
     border:1px solid #aaa;
-    width: 310px; 
+    width: 300px; 
     height: 30px; 
     box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
     border-radius:2px;
@@ -42,7 +42,7 @@ input[type="number"] {
 }
 
 select {
-    font-size: 250%;
+    font-size: 150%;
     font-family: 'News Cycle', sans-serif; 
 }
 
@@ -50,4 +50,10 @@ fieldset {
     margin: 0; 
     padding: 0;
     border: none; 
+}
+
+input[type=submit] {
+    width: 100px;  
+    height: 30px;
+    font-size: 125%; 
 }
