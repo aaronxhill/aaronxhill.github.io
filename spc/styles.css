@@ -12,7 +12,7 @@ html, body {
 
 h1 {
     color: #99744E;
-    font-size: 100%; 
+    font-size: 150%; 
     font-weight: bold; 
 }
 
@@ -65,6 +65,6 @@ input[type=submit] {
 }
 
 .makeSmall {
-    color: #242B6B;
+/*     color: #242B6B; */
     font-size: 85%; 
 }
