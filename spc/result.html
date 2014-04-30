@@ -336,7 +336,7 @@ if (windType == "headwind") {
 else if (windType == "tailwind") {
   $('#tailwindComp').html("Tailwind component: "+tailwindComp+" knots");
   $('#warnTailwindComp').html(warnTailwindComp);}
-  $('#pa_act').html("Pressure altitude: "+pa_act);
+  $('#pa_act').html("Pressure altitude: "+Math.round(pa_act));
   $('#windType').html("Wind type: "+windType);
 
 //   $('#Est1').html("Estimate without adjustment for soft field or headwind component: "+Est1);
