@@ -165,19 +165,51 @@ if (airport!="NOAIRPORT") {
   var useTemperature = 0; 
   }
   
-// COMPUTE crosswind component
-  var crosswindComp = Math.abs(Math.sin((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed);
-  if (crosswindComp > 15) {
-  var warnCrosswindComp = "WARNING: crosswind component exceeds maximum demonstrated performance for this aircraft. Crosswind component is "+ crosswindComp + " knots"; 
+// CHECK for tailwind component
+  var windType = "headwind";
+  if ((useRunwayNumber + 90) > 360) {
+    var twRight = 360 - useRunwayNumber + 90; 
+  }
+  else {
+    var twRight = useRunwayNumber + 90; 
+  }
+  if ((useRunwayNumber - 90) < 0) {
+    var twLeft = 360 + useRunwayNumber - 90; 
+  }
+  else {
+    var twLeft = useRunwayNumber - 90; 
+  }
+  if (useWindDir > twRight && useWindDir < twLeft) {
+    var windType = "tailwind";
   }
 
-// COMPUTE headwind component
-  var headwindComp  = Math.abs(Math.cos((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed); 
+// COMPUTE headwind/tailwind component
+  var headwindComp  = Math.abs(Math.cos((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed);
+  var headwindComp = Math.round(headwindComp * 100) / 100; 
 
+  // tailwind
+  if (windType == "tailwind") {  
+    var tailwindComp  = Math.abs(Math.cos((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed); 
+    var tailwindComp = Math.round(tailwindComp * 100) / 100; 
+  if (tailwindComp < 10) {  
+  var warnTailwindComp = "WARNING: There is a tailwind. Do you want to use reciprocal runway? The tailwind component is "+ tailwindComp + " knots."; 
+  }
+  else {
+  var warnTailwindComp = "WARNING: Tailwind exceeds the maximum. The tailwind component is "+ tailwindComp + " knots. Use reciprocal runway."; 
+  }
+  }
+
+// COMPUTE crosswind component
+  var crosswindComp = Math.abs(Math.sin((useWindDir - useRunwayNumber) * (Math.PI / 180)) * useWindSpeed);
+  var crosswindComp = Math.round(crosswindComp * 100) / 100; 
+  if (crosswindComp > 15) {
+  var warnCrosswindComp = "WARNING: crosswind component exceeds maximum demonstrated performance for this aircraft. The crosswind component is "+ crosswindComp + " knots."; 
+  }
+  
 // COMPUTE pressure altitude
   var pa_act = useElevation - ((usePressure - 29.92) * 1000);
   if (pa_act < 0) {
-  var paWarn = "NOTE: The actual pressure altitude is " + pa_act + ", but the value used to compute the final estimate is 0."; 
+  var paWarn = "NOTE: The actual pressure altitude is " + Math.abs(Math.round(pa_act)) + " below sea level, but the value used to compute the final estimate is 0."; 
   var pa_act = 0; 
   } 
 
@@ -243,55 +275,70 @@ function estimate(useObstacle) {
 // FINAL ESTIMATE
   var finalEstimateGr = Math.round(estimate(0));
   var finalEstimateOb = Math.round(estimate(1));
+  
+  if (windType == "tailwind") {  
+  var finalEstimateGr = Math.round(finalEstimateGr + (finalEstimateGr * (0.05 * tailwindComp))); 
+  var finalEstimateOb = Math.round(finalEstimateOb + (finalEstimateOb * (0.05 * tailwindComp))); 
+  }
+  
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 // return to divs  
   $('#airport').html("Airport Code: "+airport); 
   $('#runway').html("Runway Number: "+runway); 
-  $('#grossWeight').html("Gross Weight: "+grossWeight); 
-  if (roll == 1) {
-  $('#roll').html("Obstacle: distance to clear 50 foot obstacle");}
-  else { 
-  $('#roll').html("Obstacle: ground roll"); }
+  $('#grossWeight').html("Gross Weight: "+numberWithCommas(grossWeight)+" pounds"); 
+//   if (roll == 1) {
+//   $('#roll').html("Obstacle: distance to clear 50 foot obstacle");}
+//   else { 
+//   $('#roll').html("Obstacle: ground roll"); }
   if (soft == 1) {
   $('#soft').html("Soft Field: yes");}
   else {
   $('#soft').html("Soft Field: no");}
   
   if (windSpeed != "") {
-  $('#windSpeed').html("Wind Speed: "+windSpeed); }
+  $('#windSpeed').html("Wind Speed: "+windSpeed+" kph"); }
   if (windDir != "") {
-  $('#windDir').html("Wind Direction "+windDir); }
+  $('#windDir').html("Wind Direction "+windDir+"&deg;"); }
   if (elevation != "") {
   $('#elevation').html("Elevation: "+elevation); }
   if (elevation != "") {
   $('#elev').html("Elevation Unit: "+elev); }
   if (pressureIn != "") {
-  $('#pressureIn').html("Barometric Pressure: "+pressureIn); }
+  $('#pressureIn').html("Barometric Pressure: "+pressureIn+" in. Hg."); }
   if (temperature != "") {
-  $('#temperature').html("Temperature: "+temperature); }
+  $('#temperature').html("Temperature: "+temperature+"&deg;"); }
   if (temperature != "") {
   $('#temp').html("Temperature Unit: "+temp); }
   
-  $('#elevationW').html("Elevation: "+elevationW+" meters"); 
-  $('#temp_cW').html("Temp(C): "+temp_cW); 
-  $('#wind_kphW').html("Wind Speed (kph): "+wind_kphW); 
-  $('#wind_degreesW').html("Wind Direction: "+wind_degreesW); 
-  $('#pressure_inW').html("Barometric Pressure: "+pressure_inW); 
-  $('#wind_stringW').html("Weather Report: "+wind_stringW); 
+  $('#elevationW').html("Elevation: "+Math.round(Number(elevationW))+" meters"); 
+  $('#temp_cW').html("Temp(C): "+temp_cW+"&deg;"); 
+  $('#wind_kphW').html("Wind Speed: "+wind_kphW+" kph"); 
+  $('#wind_degreesW').html("Wind Direction: "+wind_degreesW+"&deg;"); 
+  $('#pressure_inW').html("Barometric Pressure: "+pressure_inW+" in. Hg."); 
+  $('#wind_stringW').html("Wind: "+wind_stringW); 
 
-  $('#useRunwayNumber').html("Runway Degrees: "+useRunwayNumber); 
-  $('#useGrossWeight').html("Gross Weight: "+useGrossWeight); 
+  $('#useRunwayNumber').html("Runway Orientation: "+useRunwayNumber+"&deg;"); 
+  $('#useGrossWeight').html("Gross Weight: "+numberWithCommas(useGrossWeight)+" pounds"); 
 //   $('#useObstacle').html("Obstacle: "+useObstacle); 
-  $('#useSoft').html("Soft Field Takeoff: "+useSoft); 
-  $('#useWindSpeed').html("Wind Speed: "+useWindSpeed); 
-  $('#useWindDir').html("Wind Direction: "+useWindDir); 
-  $('#useElevation').html("Elevation: "+useElevation); 
-  $('#usePressure').html("Barometric Pressure: "+usePressure); 
-  $('#useTemperature').html("Temperature: "+useTemperature); 
+  $('#useSoft').html("Soft Field Takeoff: "+useSoft+" (1=yes, 0=no)"); 
+  $('#useWindSpeed').html("Wind Speed: "+useWindSpeed+" kph"); 
+  $('#useWindDir').html("Wind Direction: "+useWindDir+"&deg;"); 
+  $('#useElevation').html("Elevation: "+useElevation+" feet"); 
+  $('#usePressure').html("Barometric Pressure: "+usePressure+" in. Hg."); 
+  $('#useTemperature').html("Temperature: "+useTemperature+"&deg;"); 
   
-  $('#crosswindComp').html("Crosswind component: "+crosswindComp);
-  $('#headwindComp').html("Headwind component: "+headwindComp);
+  $('#crosswindComp').html("Crosswind component: "+crosswindComp+" knots");
+if (windType == "headwind") {
+  $('#headwindComp').html("Headwind component: "+headwindComp+" knots");}
+else if (windType == "tailwind") {
+  $('#tailwindComp').html("Tailwind component: "+tailwindComp+" knots");
+  $('#warnTailwindComp').html(warnTailwindComp);}
   $('#pa_act').html("Pressure altitude: "+pa_act);
+  $('#windType').html("Wind type: "+windType);
+
 //   $('#Est1').html("Estimate without adjustment for soft field or headwind component: "+Est1);
 //   $('#Est2').html("Adjustment for soft field: "+Est2);
 //   $('#Est3').html("Adjustment for headwind component: "+Est3);
@@ -301,11 +348,17 @@ function estimate(useObstacle) {
   $('#warnCrosswindComp').html(warnCrosswindComp);
   $('#paWarn').html(paWarn);
 
-  $('#finalEstimateOb').html("DISTANCE TO CLEAR 50 FT OBSTACLE (IN FEET): "+finalEstimateOb);
-  $('#finalEstimateGr').html("GROUND ROLL (IN FEET): "+finalEstimateGr);
+//   $('#finalEstimateOb').html("Distance to clear 50 ft. obstacle (in feet): "+finalEstimateOb);
+//   $('#finalEstimateGr').html("Ground roll (in feet): "+finalEstimateGr);
+// 
+//   $('#KIASfiftyft').html("Speed at 50 feet: "+KIASfiftyft+" KIAS");
+//   $('#KIASliftoff').html("Speed at liftoff: "+KIASliftoff+" KIAS");
 
-  $('#KIASfiftyft').html("Speed at 50 feet: "+KIASfiftyft+" KIAS");
-  $('#KIASliftoff').html("Speed at liftoff: "+KIASliftoff+" KIAS");
+  $('#finalEstimateOb').html(numberWithCommas(finalEstimateOb));
+  $('#finalEstimateGr').html(numberWithCommas(finalEstimateGr));
+
+  $('#KIASfiftyft').html(KIASfiftyft);
+  $('#KIASliftoff').html(KIASliftoff);
   
   }
     });;
@@ -313,23 +366,24 @@ function estimate(useObstacle) {
 
 </script>
 
-<h1>Skylane Short Field Takeoff Performance Calculator</h1>
+<h1>Skylane Takeoff Performance Calculator</h1>
 
 <!-- warnings -->
 <div id = "warnGrossWeight"></div>
 <div id = "warnCrosswindComp"></div>
+<div id = "warnTailwindComp"></div>
 
 <!-- notes -->
 <div id = "warnTemperature"></div>
 <div id = "paWarn"></div>
 
 <h2>Final Estimate</h2>
-<div id = "KIASliftoff"></div>
-<div id = "KIASfiftyft"></div>
-<div id = "finalEstimateGr"></div>
-<div id = "finalEstimateOb"></div>
+<p><div id = "KIASliftoff"></div>Speed at liftoff (KIAS)</p>
+<p><div id = "KIASfiftyft"></div>Speed at 50 feet (KIAS)</p>
+<p><div id = "finalEstimateGr"></div>Ground roll (in feet)</p> 
+<p><div id = "finalEstimateOb"></div>Distance to clear 50 ft. obstacle (in feet)</p>
 
-<h2>Weather Underground</h2>
+<h3>Data retrieved from Weather Underground</h3>
 <div id = "elevationW"></div>
 <div id = "temp_cW"></div>
 <div id = "wind_kphW"></div>
@@ -337,7 +391,7 @@ function estimate(useObstacle) {
 <div id = "pressure_inW"></div>
 <div id = "wind_stringW"></div>
 
-<h2>Self Reported</h2>
+<h3>What you entered into the calculator</h3>
 <div id = "airport"></div>
 <div id = "runway"></div>
 <div id = "grossWeight"></div>
@@ -352,7 +406,7 @@ function estimate(useObstacle) {
 <div id = "temperature"></div>
 <div id = "temp"></div>
 
-<h2>Adjusted Inputs</h2>
+<h3>The inputs used for the calculation</h3>
 <div id = "useRunwayNumber"></div>
 <div id = "useGrossWeight"></div>
 <!-- <div id = "useObstacle"></div> -->
@@ -363,9 +417,11 @@ function estimate(useObstacle) {
 <div id = "usePressure"></div>
 <div id = "useTemperature"></div>
 
-<h2>Computations</h2>
+<h3>Wind and pressure altitude</h3>
 <div id = "crosswindComp"></div>
 <div id = "headwindComp"></div>
+<div id = "tailwindComp"></div>
+<!-- <div id = "windType"></div> -->
 <div id = "pa_act"></div>
 <!-- <div id = "Est1"></div> -->
 <!-- <div id = "Est2"></div> -->
