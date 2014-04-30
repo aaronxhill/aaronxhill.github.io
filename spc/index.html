@@ -14,11 +14,11 @@
         
         
         <script>
-        if (confirm("This performance calculator is for use as an indication and reference tool only. It is your responsibility as the pilot to make sure that the information provided in this application is precise and accurate for your airplane. The application developer does not take responsibility or legal responsibility for inaccurate or misleading information in this takeoff performance calculator. Do you agree to this disclaimer?")) {
-        }
-        else {
-        window.location.href = "deny.html"; 
-        }
+//         if (confirm("This performance calculator is for use as an indication and reference tool only. It is your responsibility as the pilot to make sure that the information provided in this application is precise and accurate for your airplane. The application developer does not take responsibility or legal responsibility for inaccurate or misleading information in this takeoff performance calculator. Do you agree to this disclaimer?")) {
+//         }
+//         else {
+//         window.location.href = "deny.html"; 
+//         }
         
         if (Modernizr.localstorage) {
             
@@ -93,17 +93,18 @@
 
 <h1>Skylane Short Field Takeoff Performance Calculator</h1>
 
-<p>This application is for the Skylane model 182T (non-turbocharged) only and is based on data in 
+<p class="makeSmall">This application is for the Skylane model 182T (non-turbocharged) only and is based on data in 
    the Cessna Information Manual for Skylane 182T Serials 18281869 and 18281876 and On.</p>
-<p>These calculations are based on Short Field technique in Section 4. CONDITIONS: Flaps 20º, 
+<p class="makeSmall">These calculations are based on Short Field technique in Section 4. CONDITIONS: Flaps 20º, 
    2400RPM, Cowl Flaps Open, Full Throttle and mixture set prior to brake release.</p>
 
 <form id="localStorageTest" method="" action="">
 
 <fieldset>
 <!-- autofocus -->
-    <label><div id = "acWarn"><div class="formHead">Airport Code:</div></label>
+    <label><div id = "acWarn"><div class="formHead">Airport Code (optional):</div></label>
     <input type="text" name="airport" id="airport" class="stored" value="" autocapitalize="characters" /></div>
+    <div class="formDescrip">ICAO or IATA</div>
         <script>
         if (localStorage.getItem("acWarn") == "yes") {
         document.getElementById("acWarn").style.color="red";};
@@ -165,8 +166,9 @@
     </select>
 </fieldset>
     
-    <p>Entering an airport code above will access the latest terminal weather. <br>
-    To provide your own data, use any or all of the fields below to supplement it:</p>
+    <p class="makeSmall">If you provided an airport code, your estimate will be based on current weather data retrieved from Weather Underground. 
+    NOTE: you can override these data (wind direction, temperature, etc.) by entering your own values in any or all of the boxes below.
+    </p>
 
 <fieldset>
     <label><div id="wsWarn"><div class="formHead">Wind Speed:</div></label>
@@ -219,7 +221,9 @@
     <input type="radio" name="temp" value="fahrenheit" >Fahrenheit</div></div>
 </fieldset>
 
+<fieldset> 
     <input id = "Calculate" name="Calculate" class="Calculate-button" type="submit" value="Calculate" />
+</fieldset> 
 </form>
 
 <p>
