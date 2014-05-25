@@ -73,10 +73,17 @@ li span {
 }  
 
 /* 
-.legend {
-    font-size: 10px;
-    float: right; 
-    text-align: right          
+g.legend {
+    position: absolute; 
+    top: 100px; 
+    left: 600px; 
 }
  */
 
+.leg_title {
+    font-weight: bold; 
+}
+
+.leg_lab {
+    font-size: 80%; 
+}
