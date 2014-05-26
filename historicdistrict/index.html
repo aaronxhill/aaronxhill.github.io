@@ -30,7 +30,7 @@
 				/ <a href="Javascript: void(0);" id="both" class="notselected">both</a></li>
 				
 				<li><span>filter:</span>
-				<a href="Javascript: void(0);" id="all_b" class="selected">show all</a> / <a href="Javascript: void(0);" id="after_hd" class="notselected">show only those built since 1969</a></li>
+				<a href="Javascript: void(0);" id="all_b" class="selected">show all</a> / <a href="Javascript: void(0);" id="after_hd" class="notselected">show only those built after 1969</a></li>
 			
 			</ul>
 		
@@ -163,6 +163,13 @@ var stnames = svg.selectAll("g.stnames")
               .style("font-size", "10"); 
 //         FIXES: use scales instead of manual transformations; move style to CSS
 
+// mask area behind selector container
+
+d3.select("svg")
+   .append("polygon")
+   .attr("points", "375,0 941.1765,315 941.1765,0")
+   .attr("fill", "white");
+
 // Compass
 
 d3.select("svg")
@@ -231,7 +238,7 @@ var dataleg_bb = [
 // legend parameters
 var l_width = 20; 
 var offset_x = 700; 
-var offset_y = 120; 
+var offset_y = 80; 
 
 // legend scale
 var scale = d3.scale.linear()
