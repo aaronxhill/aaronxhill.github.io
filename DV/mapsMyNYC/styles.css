@@ -1,0 +1,24 @@
+body {
+    background-color: white;
+    font-family: arial; 
+    }
+
+.fotos {
+    width: 1300px; 
+/*     margin-left: auto; */
+/*     margin-right: auto;  */
+    margin-bottom: 250px; 
+}
+
+img {
+    height: 600px;
+    width: auto; 
+    display: block; 
+    margin: auto; 
+}
+
+h1 {
+    text-align: center; 
+    font-size: 12pt; 
+    margin-bottom: 0; 
+}
