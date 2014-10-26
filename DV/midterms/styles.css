@@ -8,14 +8,16 @@ body {
     width: 1300px; 
 /*     margin-left: auto; */
 /*     margin-right: auto;  */
-    margin-bottom: 250px; 
+    margin-bottom: 0px; 
+    margin-top: 5px; 
 }
 
-.fotosO {
+.fotosx {
     width: 1300px; 
 /*     margin-left: auto; */
 /*     margin-right: auto;  */
-    margin-bottom: 0px; 
+    margin-bottom: 250px; 
+    margin-top: 5px; 
 }
 
 img {
@@ -34,11 +36,15 @@ h1 {
 h2 {
     text-align: center; 
     font-size: 18pt; 
-    margin-bottom: 50px;
     color: black;  
 }
 
 .even {
     background-color: grey; 
     padding: 50px; 
+}
+
+.rcodes {
+    margin-bottom: 250px; 
+/*     width: 900px;  */
 }
