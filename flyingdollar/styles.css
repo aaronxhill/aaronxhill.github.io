@@ -1,0 +1,41 @@
+h1 {
+    font-family: 'Codystar', cursive;
+/*     font-family: 'Sonsie One', cursive; */
+    font-size: 5em;
+    color: white; 
+    margin-top: 15%;
+    margin-left: 75px; 
+    margin-bottom: 0; 
+}
+
+h2 {
+    font-family: 'Lobster', cursive;
+    font-size: 4em;
+    color: white; 
+    margin-left: 335px; 
+    margin-top: 0; 
+}
+
+p {
+    font-family: 'Lobster', cursive;
+    font-size: 18pt; 
+}
+
+
+body {
+    background-image: url(flyingdollar.gif);
+    background-size: cover; 
+}
+    
+#info {
+/*     background-color: white;  */
+/*     opacity: .8;  */
+/*     width: 500px; */
+/*     height: 200px;  */
+    color: white; 
+    font-size: 14pt; 
+    margin-left: 725px; 
+    margin-right: 25px; 
+    margin-top: 100px; 
+/*     text-align: right;  */
+}
