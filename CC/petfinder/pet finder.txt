@@ -1,0 +1,21 @@
+Pet Finder
+Find your next pet! 
+
+Complete this quiz to find out which pet is best for you. 
+
+Do you like pets that bark? 
+YES NO
+
+Do you like cuddly pets?
+YES NO
+
+NO NO Turtle
+NO YES Cat
+YES NO Seal
+YES YES Dog
+
+The best pet for you...
+CAT! 
+image
+
+

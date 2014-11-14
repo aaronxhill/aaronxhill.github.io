@@ -1,0 +1,61 @@
+body {
+    font-family: arial; 
+    width: 100%; 
+    margin: auto;
+    clear: both; 
+    text-align: center; 
+    }
+
+#buttonOneYes, #buttonOneNo, #buttonTwoYes, #buttonTwoNo {
+    display: table;
+    width: 100px;
+    height: 50px;
+    background: black;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+#buttonOneYes span, #buttonOneNo span, #buttonTwoYes span, #buttonTwoNo span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#buttonOneYesClicked, #buttonOneNoClicked, #buttonTwoYesClicked, #buttonTwoNoClicked {
+    display: table;
+    width: 100px;
+    height: 50px;
+    background: darkgray;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+#buttonOneYesClicked span, #buttonOneNoClicked span, #buttonTwoYesClicked span, #buttonTwoNoClicked span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#buttonOneYes:hover, #buttonOneNo:hover, #buttonTwoYes:hover, #buttonTwoNo:hover {
+	background: darkgray; 
+}
+
+#buttonOneYes:active, #buttonOneNo:active, #buttonTwoYes:active, #buttonTwoNo:active {
+	background: gray; 
+}
+
+.buttonContainer {
+	width: 250px;
+	height: 50px;
+	margin: 0 auto; 
+}
+
+#catPhoto {
+	max-height: 500px; 
+}
