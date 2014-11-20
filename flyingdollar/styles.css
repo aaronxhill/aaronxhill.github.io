@@ -6,28 +6,64 @@ html {
   background-size: cover;
 }
 
+/* 
+Sue Ellen Francisco
+Codystar
+Sonsie One
+Fredericka the Great
+Lobster
+Homemade Apple
+Six Caps
+Roboto
+Open Sans Condensed
+Lato
+Cabin
+Rock Salt
+Amatic SC
+Playball
+Pacifico
+Raleway
+Roboto Slab
+ */
 
 h1 {
 /*     font-family: 'Codystar', cursive; */
     font-family: 'Sonsie One', cursive;
-    font-size: 4em;
+    font-size: 350%;
     color: white; 
-    margin-top: 20%;
-    margin-left: 175px; 
+    margin-top: 7%;
+    text-align: center; 
+/*     width: 100%;  */
+/*     margin-left: 175px; */
+/*     margin-right: auto;   */
     margin-bottom: 0; 
+/*     text-shadow: 1px 1px 1px black;  */
+}
+
+@media (max-width: 875px) {
+    h1 {
+        font-size: 300%; 
+    }
+}
+
+@media (min-width: 1230px) {
+    h1 {
+        font-size: 500%; 
+    }
 }
 
 h2 {
-    font-family: 'Lobster', cursive;
-    font-size: 4em;
+    font-family: 'Sonsie One', cursive;
+    font-size: 3em;
     color: white; 
     margin-left: 335px; 
     margin-top: 0; 
 }
 
 p {
-    font-family: 'Open Sans Condensed', sans-serif;    
-    font-size: 18pt; 
+    font-family: 'Amatic SC', sans-serif;    
+    font-size: 22pt; 
+    display: none; 
 }
 
 
@@ -43,9 +79,55 @@ body {
 /*     width: 500px; */
 /*     height: 200px;  */
     color: white; 
-    font-size: 14pt; 
+    font-size: 22pt; 
     margin-left: 725px; 
     margin-right: 25px; 
-    margin-top: 50px; 
+    margin-top: 15%; 
 /*     text-align: right;  */
+}
+
+#menubar {
+    background: white; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    margin-top: 0;
+}
+
+body #menubar {
+/*     margin: 0;  */
+}
+
+li {
+    display: inline; 
+    margin-right: 50px; 
+}
+
+li:hover {
+    color: #79adea; 
+}
+
+#bullOne {
+/*     margin-left: 250px;  */
+}
+
+ul {
+    height: 50px; 
+    width: 100%; 
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-family: 'Amatic SC', sans-serif;
+    font-size: 32px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: inline-block;  
+}
+
+#menubar ul {
+    margin: 0; 
+    list-style-type: none;
+/*     display: inline; */
 }
