@@ -1,0 +1,279 @@
+window.onload = function () {
+
+var schools = ["P.S. 015 Roberto Clemente", "P.S. 019 Asher Levy", "P.S. 020 Anna Silver", "P.S. 034 Franklin D. Roosevelt"];
+
+var schoolNow = schools[0];
+
+var holidays = [
+  {
+    "holidayName":"Yom Kippur",
+    "startDate":"9/13/13",
+    "endDate":"9/13/13"
+  },
+  {
+    "holidayName":"Sukkot",
+    "startDate":"9/20/13",
+    "endDate":"9/20/13"
+  },
+  {
+    "holidayName":"Columbus Day",
+    "startDate":"10/14/13",
+    "endDate":"10/14/13"
+  },
+  {
+    "holidayName":"Eid-ul-Adha",
+    "startDate":"10/15/13",
+    "endDate":"10/15/13"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (HS)",
+    "startDate":"10/24/13",
+    "endDate":"10/25/13"
+  },
+  {
+    "holidayName":"Halloween, Diwali",
+    "startDate":"10/31/13",
+    "endDate":"10/31/13"
+  },
+  {
+    "holidayName":"Election Day",
+    "startDate":"11/5/13",
+    "endDate":"11/5/13"
+  },
+  {
+    "holidayName":"Veteransâ€™ Day",
+    "startDate":"11/11/13",
+    "endDate":"11/11/13"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (ES)",
+    "startDate":"11/13/13",
+    "endDate":"11/14/13"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (MS)",
+    "startDate":"11/18/13",
+    "endDate":"11/19/13"
+  },
+  {
+    "holidayName":"Hanukkah",
+    "startDate":"11/26/13",
+    "endDate":"11/26/13"
+  },
+  {
+    "holidayName":"Thanksgiving",
+    "startDate":"11/28/13",
+    "endDate":"11/29/13"
+  },
+  {
+    "holidayName":"Winter Recess",
+    "startDate":"12/23/13",
+    "endDate":"1/1/14"
+  },
+  {
+    "holidayName":"Official Snow Day",
+    "startDate":"1/3/14",
+    "endDate":"1/3/14"
+  },
+  {
+    "holidayName":"MLK Day",
+    "startDate":"1/20/14",
+    "endDate":"1/20/14"
+  },
+  {
+    "holidayName":"Regents Exams (HS only)",
+    "startDate":"1/27/14",
+    "endDate":"1/30/14"
+  },
+  {
+    "holidayName":"Scoring Day (HS only)",
+    "startDate":"1/31/14",
+    "endDate":"1/31/14"
+  },
+  {
+    "holidayName":"Staff Development Day (HS only)",
+    "startDate":"2/3/14",
+    "endDate":"2/3/14"
+  },
+  {
+    "holidayName":"Mid-Winter Recess",
+    "startDate":"2/17/14",
+    "endDate":"2/21/14"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (MS)",
+    "startDate":"2/26/14",
+    "endDate":"2/27/14"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (HS)",
+    "startDate":"2/27/14",
+    "endDate":"2/28/14"
+  },
+  {
+    "holidayName":"Parent-Teacher Conferences (ES)",
+    "startDate":"3/11/14",
+    "endDate":"3/12/14"
+  },
+  {
+    "holidayName":"St. Patrickâ€™s Day",
+    "startDate":"3/17/14",
+    "endDate":"3/17/14"
+  },
+  {
+    "holidayName":"State ELA Tests (grades 3-8)",
+    "startDate":"4/1/14",
+    "endDate":"4/3/14"
+  },
+  {
+    "holidayName":"Spring Recess",
+    "startDate":"4/14/14",
+    "endDate":"4/22/14"
+  },
+  {
+    "holidayName":"State Math Tests (grades 3-8)",
+    "startDate":"4/30/14",
+    "endDate":"5/2/14"
+  },
+  {
+    "holidayName":"Memorial Day",
+    "startDate":"5/26/14",
+    "endDate":"5/26/14"
+  },
+  {
+    "holidayName":"Clerical Half Day",
+    "startDate":"6/3/14",
+    "endDate":"6/3/14"
+  },
+  {
+    "holidayName":"Anniversary Day",
+    "startDate":"6/5/14",
+    "endDate":"6/5/14"
+  },
+  {
+    "holidayName":"Clerical Half Day",
+    "startDate":"6/9/14",
+    "endDate":"6/9/14"
+  },
+  {
+    "holidayName":"Regents Exams (HS only)",
+    "startDate":"6/17/14",
+    "endDate":"6/25/14"
+  }
+];
+
+var weather = [
+  {
+    "startDate":"12/6/13",
+    "endDate":"12/10/13"
+  },
+  {
+    "startDate":"12/16/13",
+    "endDate":"12/18/13"
+  },
+  {
+    "startDate":"1/2/14",
+    "endDate":"1/8/14"
+  },
+  {
+    "startDate":"1/21/14",
+    "endDate":"1/23/14"
+  },
+  {
+    "startDate":"1/31/14",
+    "endDate":"2/6/14"
+  },
+  {
+    "startDate":"2/12/14",
+    "endDate":"2/14/14"
+  },
+  {
+    "startDate":"4/29/14",
+    "endDate":"5/1/14"
+  },
+  {
+    "startDate":"5/15/14",
+    "endDate":"5/19/14"
+  }
+];
+
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// date format: 9/11/13
+var parseDate = d3.time.format("%m/%d/%y").parse;
+
+var x = d3.time.scale()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+// var weatherRect = d3.svg.rect()
+//     .x
+
+var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value); });
+
+var lineGroup = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.group); });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+d3.csv("data/0.csv", function(d) {
+    return {
+        date: parseDate(d.variable),
+        value: +d.value,
+        group: +d.group
+    };
+}, function(error, data) {
+
+x.domain(d3.extent(data, function(d) { return d.date; }));
+y.domain(d3.extent(data, function(d) { return d.value; }));
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Students Present");
+
+  svg.append("path")
+      .datum(data)
+      .attr("class", "lineGroup")
+      .attr("d", lineGroup);
+
+  svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line);
+
+});
+
+document.getElementById('schoolName').textContent = schoolNow; 
+
+}
