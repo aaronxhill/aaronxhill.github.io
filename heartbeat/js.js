@@ -216,10 +216,17 @@ var holidays = [
   }
 ];
 
+console.log("holiday length"); 
+console.log(holidays.length)
+
 for (var i = 0; i < holidays.length; i++) {
     holidays[i].startDate = new Date(Date.parse(holidays[i].startDate));
     holidays[i].endDate = new Date(Date.parse(holidays[i].endDate));
 }
+
+// console.log(holidays[4].endDate - holidays[4].startDate);
+// console.log(holidays[0].endDate - holidays[0].startDate);
+// console.log(holidays[20].endDate - holidays[20].startDate);
 
 var weather = [
   {
@@ -309,6 +316,15 @@ var line = d3.svg.line()
 var lineGroup = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.group); });
+    
+//experiment here
+
+// var rects = d3.svg.rect()
+//     .x()
+//     .y()
+//     .
+
+//exp end
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -341,12 +357,61 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Students Present");
+    
+
+  svg.append("g")
+      .attr("class", "weatherRect");
+
+svg.select(".weatherRect").selectAll("rect")
+      .data(weather)
+      .enter()
+      .append("rect")
+      .attr("x", function (d) {return x(d.startDate)})
+      .attr("y", 0)
+      .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
+      .attr("height", height)
+      .attr("fill", "blue")
+      .attr("fill-opacity", 0.15)
+      ;
+
+// svg.selectAll("rect")
+//       .data(weather)
+//       .enter()
+//       .append("rect")
+//       .attr("x", function (d) {return x(d.startDate)})
+//       .attr("y", 0)
+//       .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
+//       .attr("height", height)
+//       .attr("fill", "blue")
+//       .attr("fill-opacity", 0.15)
+//       ;
+      
+  svg.append("g")
+      .attr("class", "holidayRect");
+
+svg.select(".holidayRect").selectAll("rect")
+      .data(holidays)
+      .enter()
+      .append("rect")
+      .attr("x", function (d) {return x(d.startDate)})
+      .attr("y", 0)
+      .attr("width", function (d) {return x(d.endDate) + 3.06896551724139 - x(d.startDate)})
+      .attr("height", height)
+      .attr("fill", "grey")
+      .attr("fill-opacity", 0.15)
+      
+//       .append("text")
+//       holidayName
+      ;
+
+console.log("new"); 
+console.log(x(holidays[4].endDate) - x(holidays[4].startDate)); 
 
   svg.append("g")
       .attr("class", "line1")
       .append("path")
       .datum(data)
-      .transition()
+//       .transition()
       .attr("class", "lineGroup")
       .attr("d", lineGroup);
 
@@ -354,7 +419,7 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("class", "line2")
       .append("path")
       .datum(data)
-      .transition()
+//       .transition()
       .attr("class", "line")
       .attr("d", line);
 
@@ -388,5 +453,14 @@ d3.select('svg').select('g.line2').selectAll("path")
 
 }
 )};
+
+console.log(x(holidays[4].endDate));
+console.log(x(holidays[4].endDate) - x(holidays[4].startDate));
+console.log(x(holidays[0].endDate) - x(holidays[0].startDate));
+
+// console.log(holidays[0].endDate - holidays[0].startDate);
+// console.log(holidays[20].endDate - holidays[20].startDate);
+
+
 }
 
