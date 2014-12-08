@@ -1,8 +1,62 @@
+// d3 heartbeat
 window.onload = function () {
 
-var schools = ["P.S. 015 Roberto Clemente", "P.S. 019 Asher Levy", "P.S. 020 Anna Silver", "P.S. 034 Franklin D. Roosevelt"];
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substrRegex;
+ 
+    // an array that will be populated with substring matches
+    matches = [];
+ 
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+ 
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        // the typeahead jQuery plugin expects suggestions to a
+        // JavaScript object, refer to typeahead docs for more info
+        matches.push({ value: str });
+      }
+    });
+ 
+    cb(matches);
+  };
+};
 
+var searchInput = function () {
+
+    var toCheck = document.getElementsByClassName('tt-input')[0].value;
+    
+    for (var i = 0; i < schools.length; i++) {
+    
+        if (toCheck === schools[i]) {
+        
+            schoolNow = schools[i];
+            transitionHandle(i)
+            document.getElementById('schoolName').textContent = schoolNow; 
+            document.getElementsByClassName('tt-input')[0].value = ''; 
+            document.getElementById('notFound').textContent = '';
+            break; 
+        
+        }
+        
+        else {
+        
+            document.getElementById('notFound').textContent = '"' + toCheck + '"' + " not found. Search again.";
+            document.getElementsByClassName('tt-input')[0].value = ''; 
+        
+        } 
+    
+    }
+
+}
+
+var schools = ["P.S. 015 Roberto Clemente", "P.S. 019 Asher Levy", "P.S. 020 Anna Silver", "P.S. 034 Franklin D. Roosevelt", "The STAR Academy - P.S.63"];
+  
 var schoolNow = schools[0];
+document.getElementById('schoolName').textContent = schoolNow; 
 
 var holidays = [
   {
@@ -162,6 +216,11 @@ var holidays = [
   }
 ];
 
+for (var i = 0; i < holidays.length; i++) {
+    holidays[i].startDate = new Date(Date.parse(holidays[i].startDate));
+    holidays[i].endDate = new Date(Date.parse(holidays[i].endDate));
+}
+
 var weather = [
   {
     "startDate":"12/6/13",
@@ -197,12 +256,34 @@ var weather = [
   }
 ];
 
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+for (var i = 0; i < weather.length; i++) {
+    weather[i].startDate = new Date(Date.parse(weather[i].startDate));
+    weather[i].endDate = new Date(Date.parse(weather[i].endDate));
+}
+
+// on page load
+// window.onload = function () {
+
+$('#schoolSearch .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'schools',
+  displayKey: 'value',
+  source: substringMatcher(schools)
+});
+
+var searchButton = document.getElementById('button'); 
+searchButton.addEventListener('click', searchInput);
 
 // date format: 9/11/13
 var parseDate = d3.time.format("%m/%d/%y").parse;
+
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -235,10 +316,9 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
 d3.csv("data/0.csv", function(d) {
     return {
-        date: parseDate(d.variable),
+        date: parseDate(d.date),
         value: +d.value,
         group: +d.group
     };
@@ -262,18 +342,51 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .style("text-anchor", "end")
       .text("Students Present");
 
-  svg.append("path")
+  svg.append("g")
+      .attr("class", "line1")
+      .append("path")
       .datum(data)
+      .transition()
       .attr("class", "lineGroup")
       .attr("d", lineGroup);
 
-  svg.append("path")
+  svg.append("g")
+      .attr("class", "line2")
+      .append("path")
       .datum(data)
+      .transition()
       .attr("class", "line")
       .attr("d", line);
 
 });
 
-document.getElementById('schoolName').textContent = schoolNow; 
+
+// HANDLE TRANSITIONS
+var transitionHandle = function (dsn) {d3.csv("data/" + dsn + ".csv", function(d) {
+    return {
+        date: parseDate(d.date),
+        value: +d.value,
+        group: +d.group
+    };
+}, function(error, data) {
+
+d3.select('svg').select('g.line1').selectAll("path")
+      .datum(data)
+      .transition()
+      .duration(1000)
+//       .delay(1000)
+      .attr("d", lineGroup);
+      
+d3.select('svg').select('g.line2').selectAll("path")
+      .datum(data)
+      .transition()
+      .duration(1000)
+//       .delay(1000)
+      .attr("d", line);
+
+// document.getElementById('schoolName').textContent = schoolNow; 
 
 }
+)};
+}
+

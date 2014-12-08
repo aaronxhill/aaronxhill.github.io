@@ -8,6 +8,8 @@
         <title>Heartbeat Map</title>
 
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="typeahead.js"></script>
         <script src="d3/d3.js"></script>
         <script src="js.js"></script>
 
@@ -15,10 +17,17 @@
 
     <body>
 
+        <div id="schoolSearch">
+            <input class="typeahead" type="text" placeholder="School Search">
+        </div>
+        
+        <div id="button"><span>Click to Show</span></div>
+        
+        <div id="notFound"></div>
+
         <h1>Daily attendance rates, 2013−2014 school year</h1>
         
-        <p id='schoolName'></p>
-
+        <h1 id='schoolName'></h1>
 
 
     </body>
