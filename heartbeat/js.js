@@ -216,17 +216,10 @@ var holidays = [
   }
 ];
 
-console.log("holiday length"); 
-console.log(holidays.length)
-
 for (var i = 0; i < holidays.length; i++) {
     holidays[i].startDate = new Date(Date.parse(holidays[i].startDate));
     holidays[i].endDate = new Date(Date.parse(holidays[i].endDate));
 }
-
-// console.log(holidays[4].endDate - holidays[4].startDate);
-// console.log(holidays[0].endDate - holidays[0].startDate);
-// console.log(holidays[20].endDate - holidays[20].startDate);
 
 var weather = [
   {
@@ -268,9 +261,6 @@ for (var i = 0; i < weather.length; i++) {
     weather[i].endDate = new Date(Date.parse(weather[i].endDate));
 }
 
-// on page load
-// window.onload = function () {
-
 $('#schoolSearch .typeahead').typeahead({
   hint: true,
   highlight: true,
@@ -304,10 +294,9 @@ var xAxis = d3.svg.axis()
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
-
-// var weatherRect = d3.svg.rect()
-//     .x
+    .orient("left")
+    .tickFormat(d3.format("%"))
+    ;
 
 var line = d3.svg.line()
     .x(function(d) { return x(d.date); })
@@ -317,19 +306,10 @@ var lineGroup = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.group); });
     
-//experiment here
-
-// var rects = d3.svg.rect()
-//     .x()
-//     .y()
-//     .
-
-//exp end
-
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("data/0.csv", function(d) {
@@ -355,14 +335,15 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
+      .attr("x", -310)
       .style("text-anchor", "end")
-      .text("Students Present");
+      .text("Percentage of Students Present");
     
 
   svg.append("g")
       .attr("class", "weatherRect");
 
-svg.select(".weatherRect").selectAll("rect")
+  svg.select(".weatherRect").selectAll("rect")
       .data(weather)
       .enter()
       .append("rect")
@@ -373,23 +354,11 @@ svg.select(".weatherRect").selectAll("rect")
       .attr("fill", "blue")
       .attr("fill-opacity", 0.15)
       ;
-
-// svg.selectAll("rect")
-//       .data(weather)
-//       .enter()
-//       .append("rect")
-//       .attr("x", function (d) {return x(d.startDate)})
-//       .attr("y", 0)
-//       .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
-//       .attr("height", height)
-//       .attr("fill", "blue")
-//       .attr("fill-opacity", 0.15)
-//       ;
       
   svg.append("g")
       .attr("class", "holidayRect");
 
-svg.select(".holidayRect").selectAll("rect")
+  svg.select(".holidayRect").selectAll("rect")
       .data(holidays)
       .enter()
       .append("rect")
@@ -399,19 +368,12 @@ svg.select(".holidayRect").selectAll("rect")
       .attr("height", height)
       .attr("fill", "grey")
       .attr("fill-opacity", 0.15)
-      
-//       .append("text")
-//       holidayName
       ;
-
-console.log("new"); 
-console.log(x(holidays[4].endDate) - x(holidays[4].startDate)); 
 
   svg.append("g")
       .attr("class", "line1")
       .append("path")
       .datum(data)
-//       .transition()
       .attr("class", "lineGroup")
       .attr("d", lineGroup);
 
@@ -419,12 +381,10 @@ console.log(x(holidays[4].endDate) - x(holidays[4].startDate));
       .attr("class", "line2")
       .append("path")
       .datum(data)
-//       .transition()
       .attr("class", "line")
       .attr("d", line);
 
 });
-
 
 // HANDLE TRANSITIONS
 var transitionHandle = function (dsn) {d3.csv("data/" + dsn + ".csv", function(d) {
@@ -439,28 +399,16 @@ d3.select('svg').select('g.line1').selectAll("path")
       .datum(data)
       .transition()
       .duration(1000)
-//       .delay(1000)
       .attr("d", lineGroup);
       
 d3.select('svg').select('g.line2').selectAll("path")
       .datum(data)
       .transition()
       .duration(1000)
-//       .delay(1000)
       .attr("d", line);
-
-// document.getElementById('schoolName').textContent = schoolNow; 
 
 }
 )};
-
-console.log(x(holidays[4].endDate));
-console.log(x(holidays[4].endDate) - x(holidays[4].startDate));
-console.log(x(holidays[0].endDate) - x(holidays[0].startDate));
-
-// console.log(holidays[0].endDate - holidays[0].startDate);
-// console.log(holidays[20].endDate - holidays[20].startDate);
-
 
 }
 

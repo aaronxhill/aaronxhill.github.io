@@ -71,6 +71,8 @@ h1 {
     font-size: 25px; 
 }
 
+/* typeahead */
+
 .typeahead,
 .tt-query,
 .tt-hint {
