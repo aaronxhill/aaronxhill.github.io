@@ -29,6 +29,8 @@ var searchInput = function () {
 
     var toCheck = document.getElementsByClassName('tt-input')[0].value;
     
+    if (toCheck != '') {
+    
     for (var i = 0; i < schools.length; i++) {
     
         if (toCheck === schools[i]) {
@@ -50,8 +52,17 @@ var searchInput = function () {
         } 
     
     }
+    }
 
 }
+
+// event listener on enter not yet working
+// document.addEventListener('keypress', function (e) {
+//     var key = e.which || e.keyCode;
+//     if (key == 13) { // 13 is enter
+//       searchInput()
+//     }
+// });
 
 var schools = ["P.S. 015 Roberto Clemente", "P.S. 019 Asher Levy", "P.S. 020 Anna Silver", "P.S. 034 Franklin D. Roosevelt", "The STAR Academy - P.S.63"];
   
@@ -369,6 +380,34 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("fill", "grey")
       .attr("fill-opacity", 0.15)
       ;
+  
+  svg.append("line")
+      .attr("x1", 50)
+      .attr("x2", 75)
+      .attr("y1", 375)
+      .attr("y2", 375)
+      .attr("stroke", "red")
+      .attr("stroke-width", 4); 
+
+  svg.append("line")
+      .attr("x1", 50)
+      .attr("x2", 75)
+      .attr("y1", 400)
+      .attr("y2", 400)
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 4); 
+      
+  svg.append("text")
+      .attr("x", 80)
+      .attr("y", 375)
+      .attr("alignment-baseline", "middle")
+      .text("current selection"); 
+      
+  svg.append("text")
+      .attr("x", 80)
+      .attr("y", 400)
+      .attr("alignment-baseline", "middle")
+      .text("group average"); 
 
   svg.append("g")
       .attr("class", "line1")
