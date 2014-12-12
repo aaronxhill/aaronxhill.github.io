@@ -66,7 +66,7 @@ var searchInput = function () {
 
 var schools = ["P.S. 015 Roberto Clemente", "P.S. 019 Asher Levy", "P.S. 020 Anna Silver", "P.S. 034 Franklin D. Roosevelt", "The STAR Academy - P.S.63"];
   
-var schoolNow = schools[0];
+var schoolNow = '  ';
 document.getElementById('schoolName').textContent = schoolNow; 
 
 var holidays = [
@@ -287,7 +287,7 @@ var searchButton = document.getElementById('button');
 searchButton.addEventListener('click', searchInput);
 
 // date format: 9/11/13
-var parseDate = d3.time.format("%m/%d/%y").parse;
+var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
@@ -323,7 +323,7 @@ var svg = d3.select("body").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("data/0.csv", function(d) {
+d3.csv("data/999.csv", function(d) {
     return {
         date: parseDate(d.date),
         value: +d.value,
@@ -332,7 +332,8 @@ d3.csv("data/0.csv", function(d) {
 }, function(error, data) {
 
 x.domain(d3.extent(data, function(d) { return d.date; }));
-y.domain(d3.extent(data, function(d) { return d.value; }));
+// y.domain(d3.extent(data, function(d) { return d.value; }));
+y.domain([0.4, 1]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -379,6 +380,14 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("height", height)
       .attr("fill", "grey")
       .attr("fill-opacity", 0.15)
+      .on("mouseover", function() {
+        d3.select(this)
+          .attr("fill", "orange");
+        })
+      .on("mouseout", function() {
+        d3.select(this)
+          .attr("fill", "grey");
+        });
       ;
   
   svg.append("line")
@@ -387,7 +396,7 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("y1", 375)
       .attr("y2", 375)
       .attr("stroke", "red")
-      .attr("stroke-width", 4); 
+      .attr("stroke-width", 3); 
 
   svg.append("line")
       .attr("x1", 50)
@@ -395,7 +404,7 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("y1", 400)
       .attr("y2", 400)
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 4); 
+      .attr("stroke-width", 3); 
       
   svg.append("text")
       .attr("x", 80)
@@ -408,6 +417,20 @@ y.domain(d3.extent(data, function(d) { return d.value; }));
       .attr("y", 400)
       .attr("alignment-baseline", "middle")
       .text("group average"); 
+
+  svg.append("text")
+      .attr("x", 80)
+      .attr("y", 425)
+      .attr("alignment-baseline", "middle")
+      .text("inclement weather"); 
+      
+  svg.append("rect")
+      .attr("x", 50)
+      .attr("y", 425 - (15/2))
+      .attr("width", 25)
+      .attr("height", 15)
+      .attr("fill", "blue")
+      .attr("fill-opacity", 0.15);
 
   svg.append("g")
       .attr("class", "line1")
