@@ -16,18 +16,29 @@
     </head>
 
     <body>
-
-        <div id="schoolSearch">
-            <input class="typeahead" type="text" placeholder="School Search">
+    
+        <div id="tooltip" class="hidden">
+            <p><strong>Holiday:</strong></p>
+            <p><span id="value"></span></p>
         </div>
-        
-        <div id="button"><span>Click to Show</span></div>
-        
-        <div id="notFound"></div>
 
-        <h1>Daily attendance rates, 2013−2014 school year</h1>
+        <div id="searchHeader">
+            <div id="schoolSearch">
+                <input class="typeahead" type="text" placeholder="School Search">
+            </div>
         
-        <h1 id='schoolName'></h1>
+            <div id="button"><span>Click to Show</span></div>
+        
+            <div id="notFound"></div>
+        </div>
+
+        <div id="contentContainer">
+                
+            <h1>Daily attendance rates, 2013−2014 school year</h1>
+        
+            <h1 id='schoolName'></h1>
+
+       </div>
 
 
     </body>

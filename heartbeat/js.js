@@ -106,7 +106,7 @@ var holidays = [
     "endDate":"11/5/13"
   },
   {
-    "holidayName":"Veteransâ€™ Day",
+    "holidayName":"Veterans Day",
     "startDate":"11/11/13",
     "endDate":"11/11/13"
   },
@@ -181,7 +181,7 @@ var holidays = [
     "endDate":"3/12/14"
   },
   {
-    "holidayName":"St. Patrickâ€™s Day",
+    "holidayName":"St. Patrick's Day",
     "startDate":"3/17/14",
     "endDate":"3/17/14"
   },
@@ -380,13 +380,32 @@ y.domain([0.4, 1]);
       .attr("height", height)
       .attr("fill", "grey")
       .attr("fill-opacity", 0.15)
-      .on("mouseover", function() {
+      .on("mouseover", function(d) {
+      
+      //Get this bar's x/y values, then augment for the tooltip
+        var xPosition = parseFloat(d3.select(this).attr("x"));
+        var yPosition = parseFloat(d3.select(this).attr("y")) +500;
+      
         d3.select(this)
           .attr("fill", "orange");
+          
+        //Update the tooltip position and value
+        d3.select("#tooltip")
+          .style("left", xPosition + "px")
+          .style("top", yPosition + "px")
+          .select("#value")
+          .text(d.holidayName);
+
+        //Show the tooltip
+        d3.select("#tooltip").classed("hidden", false);
+
         })
       .on("mouseout", function() {
         d3.select(this)
           .attr("fill", "grey");
+        
+        //Hide the tooltip
+        d3.select("#tooltip").classed("hidden", true);
         });
       ;
   

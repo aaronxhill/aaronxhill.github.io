@@ -74,6 +74,56 @@ h1 {
     font-size: 25px; 
 }
 
+#schoolSearch {
+/*     margin-bottom: 25px;  */
+}
+
+#notFound {
+    font-size: 14px; 
+    padding-left: 10px; 
+}
+
+#searchHeader {
+    height: 70px; 
+}
+
+#contentContainer {
+    height: 65px; 
+    padding-left: 15px; 
+}
+
+#schoolName {
+    font-size: 3em;    
+    margin-top: 0;  
+}
+
+/* tooltiop */
+
+#tooltip {
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: 10px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+}
+
+#tooltip.hidden {
+        display: none;
+}
+
+#tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+}
 
 /* typeahead */
 
