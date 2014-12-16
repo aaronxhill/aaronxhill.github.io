@@ -1,9 +1,9 @@
-var colorMainLine = "blue";
+var colorMainLine = "#2c7bb6";
 var colorGroupLine = "#6b6b6c";
-var colorWeather = "#7570b3"; 
+var colorWeather = "#abd9e9"; 
 var colorWeatherOut = "#f6f6f8"; 
-var colorHolidayOn = "orange";
-var colorHolidayOff = "black"; 
+var colorHolidayOn = "#fdae61";
+var colorHolidayOff = "#000"; 
 var colorHolidayOnOut = "#f6f6f8";
 var colorHolidayOffOut = "#f6f6f8"; 
 
@@ -481,13 +481,13 @@ y.domain([0.4, 1]);
 // legend
   svg.append("text")
       .attr("x", 80)
-      .attr("y", 400)
+      .attr("y", 425)
       .attr("alignment-baseline", "middle")
       .text("current selection"); 
       
   svg.append("text")
       .attr("x", 80)
-      .attr("y", 425)
+      .attr("y", 450)
       .attr("alignment-baseline", "middle")
       .text("group average"); 
 
@@ -509,16 +509,16 @@ y.domain([0.4, 1]);
   svg.append("line")
       .attr("x1", 50)
       .attr("x2", 75)
-      .attr("y1", 400)
-      .attr("y2", 400)
+      .attr("y1", 425)
+      .attr("y2", 425)
       .attr("stroke", colorMainLine)
-      .attr("stroke-width", 3); 
+      .attr("stroke-width", 4); 
 
   svg.append("line")
       .attr("x1", 50)
       .attr("x2", 75)
-      .attr("y1", 425)
-      .attr("y2", 425)
+      .attr("y1", 450)
+      .attr("y2", 450)
       .attr("stroke", colorGroupLine)
       .attr("stroke-width", 3); 
 
