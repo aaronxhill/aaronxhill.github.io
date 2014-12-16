@@ -1,4 +1,4 @@
-var colorMainLine = "red";
+var colorMainLine = "blue";
 var colorGroupLine = "#6b6b6c";
 var colorWeather = "#7570b3"; 
 var colorWeatherOut = "#f6f6f8"; 
@@ -7,7 +7,7 @@ var colorHolidayOff = "black";
 var colorHolidayOnOut = "#f6f6f8";
 var colorHolidayOffOut = "#f6f6f8"; 
 
-var opacWeather = 0.15;
+var opacSetting = 0.25;
 
 // d3 heartbeat
 window.onload = function () {
@@ -98,7 +98,7 @@ var holidaysOn = [
   },
   {
     "holidayName":"Regents Exams (HS only)",
-    "startDate":"1/27/14",
+    "startDate":"1/25/14",
     "endDate":"2/4/14"
   },
   {
@@ -343,7 +343,7 @@ y.domain([0.4, 1]);
       .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
       .attr("height", height)
       .attr("fill", colorWeatherOut)
-//       .attr("fill-opacity", 0.5)
+      .attr("fill-opacity", opacSetting)
             .on("mouseover", function(d) {
 
       //Get this bar's x/y values, then augment for the tooltip
@@ -351,7 +351,8 @@ y.domain([0.4, 1]);
         var yPosition = parseFloat(d3.select(this).attr("y")) +500;
       
         d3.select(this)
-          .attr("fill", colorWeather);
+          .attr("fill", colorWeather)
+          .attr("fill-opacity", 1);
           
         d3.select("#tooltip3")
           .style("left", xPosition + "px")
@@ -367,7 +368,8 @@ y.domain([0.4, 1]);
 
           .on("mouseout", function() {
         d3.select(this)
-          .attr("fill", colorWeatherOut);
+          .attr("fill", colorWeatherOut)
+          .attr("fill-opacity", opacSetting);
                 //Hide the tooltip
         d3.select("#tooltip3").classed("hidden", true);
         });
@@ -386,7 +388,7 @@ y.domain([0.4, 1]);
 //       + 3.06896551724139
       .attr("height", height)
       .attr("fill", colorHolidayOnOut)
-//       .attr("fill-opacity", 0.15)
+      .attr("fill-opacity", opacSetting)
       .on("mouseover", function(d) {
       
       //Get this bar's x/y values, then augment for the tooltip
@@ -394,7 +396,8 @@ y.domain([0.4, 1]);
         var yPosition = parseFloat(d3.select(this).attr("y")) +500;
       
         d3.select(this)
-          .attr("fill", colorHolidayOn);
+          .attr("fill", colorHolidayOn)
+          .attr("fill-opacity", 1);
           
         //Update the tooltip position and value
         d3.select("#tooltip")
@@ -409,52 +412,11 @@ y.domain([0.4, 1]);
         })
       .on("mouseout", function() {
         d3.select(this)
-          .attr("fill", colorHolidayOnOut);
+          .attr("fill", colorHolidayOnOut)
+          .attr("fill-opacity", opacSetting);
         
         //Hide the tooltip
         d3.select("#tooltip").classed("hidden", true);
-        });
-      ;
-
-  svg.append("g")
-      .attr("class", "holidayOffRect");
-  svg.select(".holidayOffRect").selectAll("rect")
-      .data(holidaysOff)
-      .enter()
-      .append("rect")
-      .attr("x", function (d) {return x(d.startDate)})
-      .attr("y", 0)
-      .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
-//       + 3.06896551724139
-      .attr("height", height)
-      .attr("fill", colorHolidayOffOut)
-//       .attr("fill-opacity", 0)
-      .on("mouseover", function(d) {
-      
-      //Get this bar's x/y values, then augment for the tooltip
-        var xPosition = parseFloat(d3.select(this).attr("x"));
-        var yPosition = parseFloat(d3.select(this).attr("y")) +500;
-      
-        d3.select(this)
-          .attr("fill", colorHolidayOff);
-          
-        //Update the tooltip position and value
-        d3.select("#tooltip2")
-          .style("left", xPosition + "px")
-          .style("top", yPosition + "px")
-          .select("#value")
-          .text(d.holidayName);
-
-        //Show the tooltip
-        d3.select("#tooltip2").classed("hidden", false);
-
-        })
-      .on("mouseout", function() {
-        d3.select(this)
-          .attr("fill", colorHolidayOffOut);
-        
-        //Hide the tooltip
-        d3.select("#tooltip2").classed("hidden", true);
         });
       ;
         
@@ -471,6 +433,50 @@ y.domain([0.4, 1]);
       .datum(data)
       .attr("class", "line")
       .attr("d", line);
+
+  svg.append("g")
+      .attr("class", "holidayOffRect");
+  svg.select(".holidayOffRect").selectAll("rect")
+      .data(holidaysOff)
+      .enter()
+      .append("rect")
+      .attr("x", function (d) {return x(d.startDate)})
+      .attr("y", 0)
+      .attr("width", function (d) {return x(d.endDate) - x(d.startDate)})
+//       + 3.06896551724139
+      .attr("height", height)
+      .attr("fill", colorHolidayOffOut)
+      .attr("fill-opacity", opacSetting)
+      .on("mouseover", function(d) {
+      
+      //Get this bar's x/y values, then augment for the tooltip
+        var xPosition = parseFloat(d3.select(this).attr("x"));
+        var yPosition = parseFloat(d3.select(this).attr("y")) +500;
+      
+        d3.select(this)
+          .attr("fill", colorHolidayOff)
+          .attr("fill-opacity", 1);
+          
+        //Update the tooltip position and value
+        d3.select("#tooltip2")
+          .style("left", xPosition + "px")
+          .style("top", yPosition + "px")
+          .select("#value")
+          .text(d.holidayName);
+
+        //Show the tooltip
+        d3.select("#tooltip2").classed("hidden", false);
+
+        })
+      .on("mouseout", function() {
+        d3.select(this)
+          .attr("fill", colorHolidayOffOut)
+          .attr("fill-opacity", opacSetting);
+        
+        //Hide the tooltip
+        d3.select("#tooltip2").classed("hidden", true);
+        });
+      ;
       
 // legend
   svg.append("text")
