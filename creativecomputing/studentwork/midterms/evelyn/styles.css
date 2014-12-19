@@ -1,0 +1,106 @@
+* {
+    magin: 0;
+    padding: 0;
+}
+
+body {
+   background-image: url(Background.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 20%;
+    background-attachment: scroll;
+    background-size: cover;
+    }
+
+body {
+    margin-left: 80px;
+	height: 1200px;
+    position: relative;
+}
+
+section#content {
+    position: fixed;
+    margin-top: 300px;
+    width: 40%;
+/*	background: rgba(245,242,236,0.2);*/
+}
+
+section#title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #53687f;
+}
+
+hr {
+    margin-top: -40px;
+    margin-bottom: 30px;
+    background-color: #4c6e98;
+    border-width: 0;
+    height:1.5px;
+}
+
+section#bodytext p {
+    position: relative;
+    font-family: 'Josefin Slab', serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4c6e98;
+    line-height: 15px;
+}
+
+section#bodytext p span.firstNameStem {
+    font-style: italic;
+}
+
+section#search {
+	margin-top: 30px;
+	display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+	line-height: 35px;
+}
+
+
+section#search form input#nmgm{
+/*    display: inline-block;*/
+    font-family: 'Josefin Slab', serif;
+    font-weight: 100;
+    font-size: 19px;
+	letter-spacing: -0.5px;
+	text-align: center;
+    color: #4c6e98;
+    background-color: rgba(255,255,255,0.7);
+    border: dashed 1px;
+	border-color: #4c6e98;
+    border-radius: .7em;
+    position: relative;
+    width: 200px;
+    height: 35px;
+}
+
+section#search form input[type=text] {
+	line-height: 38px;
+}
+
+::-webkit-input-placeholder {
+   color: #4c6e98;
+}
+
+section#search form input#subButton {
+    background-color: #53687f;
+    color: white;
+    width: 80px;
+    height: 35px;
+    border: none;
+    border-radius: 2em;
+/*    position: relative;*/
+/*    display: block;*/
+    font-family: 'Josefin Slab', serif;
+    font-weight: 100;
+    font-size: 15px;
+    letter-spacing: .5px;
+    font-weight: 100;
+	margin-left: 10px;
+	line-height: 38px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Art</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+                    
+        <link rel="stylesheet" type="text/css" href="Art.css">
+                        
+                        
+</head>
+
+<body>
+
+    <button id="mybutton">Give Me Art!</button>
+
+    <script>
+        
+        var imlocation = "art/";
+        function ImageArray (n) {
+            this.length = n;
+            for (var i =1; i <= n; i++) {
+                this[i] = ' '
+            }
+        }
+    
+    image = new ImageArray(7);
+    image[0] = 'sunday.jpg';
+    image[1] = 'monday.jpg';
+    image[2] = 'tuesday.jpg';
+    image[3] = 'wednesday.jpg';
+    image[4] = 'thursday.jpg';
+    image[5] = 'friday.jpg';
+    image[6] = 'saturday.jpg';
+    var currentdate = new Date();
+    var imagenumber = currentdate.getDay();
+    document.write('<img id="artImage" src="' + imlocation + image[imagenumber] + '">');
+    
+    
+    var myButton = document.getElementById('mybutton');
+    var newImage = document.getElementById('artImage');
+    
+    myButton.addEventListener('click', function() {
+        newImage.style.opacity = 1;
+        myButton.style.opacity = 0;
+    });
+                              
+    </script>
+</body>
+</html>

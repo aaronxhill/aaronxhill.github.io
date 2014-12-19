@@ -1,0 +1,79 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+font-family: Brandon Grotesque;
+src: url("fonts/Brandon_blk.otf") format("opentype");
+}
+
+@font-face {
+font-family: Baskerville;
+src: url("fonts/Baskerville-Italic.otf") format("opentype");
+}
+
+
+body{
+	background: url(img/Background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+/*	background-attachment: fixed;*/
+	background-position: 100% 70%;
+	display: flex;
+	display: -webkit-box;
+  	display: -moz-box;
+	display: -webkit-flex;
+	flex-flow: column;
+	-webkit-flex-flow: column;
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+section.question {
+	font-family: Brandon Grotesque;
+	font-weight: 500;
+	text-transform: uppercase;
+	font-size: 2em;
+	text-align: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+section.question p {
+	background-color: black;
+	width: 15em;
+	color: white;
+	height: 2em;
+	line-height: 2em;
+}
+
+section.choices {
+	width: 70%;
+	margin-top: 4em;
+	display: flex;
+	display: -webkit-box;
+  	display: -moz-box;
+	display: -webkit-flex;
+	flex-flow: row;
+	-webkit-flex-flow: row;
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	justify-content: space-around;
+	-webkit-justify-content: space-around;
+}
+
+section.choices a {
+	text-decoration: none;
+	color: black;
+	text-align: center;
+	border-radius: 1.25em;
+	font-family: Baskerville;
+	font-style: italic;
+	font-size: 1.5em;
+	font-weight: 100;
+}

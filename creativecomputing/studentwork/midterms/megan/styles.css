@@ -1,0 +1,14 @@
+body {
+	color: #cd7d7d;
+    background-image: url("BackgroundImage.jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; 
+    background-color: #810125;
+    background-repeat: no-repeat;
+    margin-left: 100px;
+    line-height: 80%;
+    font-family: Georgia; 
+    font-size: 300%
+    }

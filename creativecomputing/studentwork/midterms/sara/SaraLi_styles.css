@@ -1,0 +1,52 @@
+body {
+    display: block;
+    background-color: #f1f1f1;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    margin-left: 800px; 
+    margin-right: 100px;
+    background-image: url("http://static.squarespace.com/static/538bf0eee4b0348ae7fc9597/t/53ff655ae4b0946dd695a473/1409246554303/Sumzine-Background-pale-10.png");
+    line-height: 50px;
+    font-size: 60px;
+    color: white;
+    Padding-top: 15%;
+    text-align: right;
+    }
+    
+    
+.subButton{
+	border : solid 0px #ffffff;
+	font-size : 20px;
+	color : #ffffff;
+	padding : 8px 20px;
+	background : #f7c3f7;
+	background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7c3f7), color-stop(100%,#e8edf0));
+	background : -moz-linear-gradient(top, #f7c3f7 0%, #e8edf0 100%);
+	background : -webkit-linear-gradient(top, #f7c3f7 0%, #e8edf0 100%);
+	background : -o-linear-gradient(top, #f7c3f7 0%, #e8edf0 100%);
+	background : -ms-linear-gradient(top, #f7c3f7 0%, #e8edf0 100%);
+	background : linear-gradient(top, #f7c3f7 0%, #e8edf0 100%);
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7c3f7', endColorstr='#e8edf0',GradientType=0 );
+
+}
+
+
+ 
+nameTextBox {
+    height: 25px;
+    width: 275px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+nameTextBox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   

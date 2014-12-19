@@ -1,0 +1,75 @@
+body {
+	padding-top: 170px;
+    color: white;
+    font-family: gill sans; sans serif;
+    font-style: italic;
+    font-size: xx-large;
+    font-weight: regular;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 3px 2px 1px #ff0000;
+    background-image: url("http://img.pandawhale.com/42784-Sister-Jude-AHS-Asylum-Name-Ga-gqam.gif");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+    }
+    
+#button {
+	-moz-box-shadow:inset 0px 34px 0px -15px #a11402;
+	
+-webkit-box-shadow:inset 0px 34px 0px -15px #a11402;
+	
+box-shadow:inset 0px 34px 0px -15px #a11402;
+	
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #630c00), color-stop(1, #9e1806));
+	
+background:-moz-linear-gradient(top, #630c00 5%, #9e1806 100%);
+	
+background:-webkit-linear-gradient(top, #630c00 5%, #9e1806 100%);
+	
+background:-o-linear-gradient(top, #630c00 5%, #9e1806 100%);
+	
+background:-ms-linear-gradient(top, #630c00 5%, #9e1806 100%);
+	
+background:linear-gradient(to bottom, #630c00 5%, #9e1806 100%);
+	
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#630c00', endColorstr='#9e1806',GradientType=0);
+	
+background-color:#630c00;
+	border:1px solid #8a0808;
+	
+display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	
+font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	
+padding:5px 15px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #6b160a;
+}
+
+#button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #9e1806), color-stop(1, #630c00));
+	
+background:-moz-linear-gradient(top, #9e1806 5%, #630c00 100%);
+	
+background:-webkit-linear-gradient(top, #9e1806 5%, #630c00 100%);
+	
+background:-o-linear-gradient(top, #9e1806 5%, #630c00 100%);
+	
+background:-ms-linear-gradient(top, #9e1806 5%, #630c00 100%);
+	
+background:linear-gradient(to bottom, #9e1806 5%, #630c00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e1806', endColorstr='#630c00',GradientType=0);
+	
+background-color:#9e1806;
+}
+
+#namebox{
+	font-family: gill sans; sans serif;
+    font-style: italic;
+    color: red;
+}

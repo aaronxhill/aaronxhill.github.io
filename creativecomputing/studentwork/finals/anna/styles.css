@@ -1,0 +1,156 @@
+#namebox{
+	font-family: gill sans; sans serif;
+    font-style: italic;
+    color: blue;
+    margin-bottom: 200px;
+
+}
+
+h1 {
+    color: white;
+    font-size: 50px; 
+    margin-top: 35px;    
+    margin-bottom: 35px;
+}
+
+h2 {
+    color: white;
+    margin-top: 10px;    
+	letter-spacing: 7px;
+}
+
+h3 {
+    font-size: 20px; 
+    margin-top: 20px;    
+    margin-bottom: 35px;
+	letter-spacing: 7px;
+}
+
+p {
+    color: white;
+    margin-top: 35px;    
+    margin-bottom: 10px;
+}
+
+body {
+	background-image: url('curtain.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+    font-family: gill sans; sans serif; 
+    width: 100%; 
+    margin: auto;
+    clear: both; 
+    text-align: center; 
+    font-size: 20px; 
+    letter-spacing: 3px;
+
+    }
+
+.buttonContainer {
+	width: 800px;
+	height: 200px;
+	margin: 0 auto; 
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
+
+}
+
+#bulb, #bird, #cat {
+    display: table;
+    background: black;
+	float: left; 
+    margin-left: 33px; 
+    margin-right: 33px; 
+	width: 200px;
+    height: 200px;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    }
+
+#bulbbody, #birdbody, #bulborbirdbody, #catbody {
+    display: table;
+	width: 200px;
+    height: 200px;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    background: black;
+	float: left; 
+    margin-left: 170px; 
+    margin-right: -100px; 
+}
+
+#bulb span, #bird span, #cat span, #bulbbody span, #birdbody span, 
+#bulborbirdbody span, #catbody span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#bulbClick, #birdClick, #catClick {
+    display: table;
+	width: 200px;
+    height: 200px;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    background: darkgray;
+	float: left; 
+    margin-left: 33px; 
+    margin-right: 33px; 
+}
+
+#bulbbodyClick, #birdbodyClick, 
+#bulborbirdbodyClick, #catbodyClick {
+    display: table;
+	width: 200px;
+    height: 200px;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    background: darkgray;
+	float: left; 
+    margin-left: 170px; 
+    margin-right: -100px; 
+}
+
+#bulbClick span, #birdClick span, #catClick span, #bulbbodyClick span, 
+#birdbodyClick span, #bulborbirdbodyClick span, #catbodyClick span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#bulb:hover, #bird:hover, #cat:hover, #bulbbody:hover, #birdbody:hover, 
+#bulborbirdbody:hover, #catbody:hover {
+	background: darkgray; 
+}
+
+#bulb:active, #bird:active, #cat:active, #bulbbody:active, #birdbody:active, 
+#bulborbirdbody:active, #cat:active {
+	background: gray; 
+}
+
+#bulbphoto, #birdphoto, #catphoto {
+    display: table;
+    margin: 0 auto; 
+    margin-top: 200px;
+
+}
+
+#bulbbodyphoto, #birdbodyphoto, #catbodyphoto {
+    display: table;
+    margin: 0 auto; 
+    margin-bottom: 100px;
+
+}
+
+#results {
+background-image:('curtain.jpg');
+}

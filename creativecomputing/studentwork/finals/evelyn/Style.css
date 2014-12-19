@@ -1,0 +1,262 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+font-family: Brandon Grotesque;
+src: url("fonts/Brandon_blk.otf") format("opentype");
+}
+
+@font-face {
+font-family: Baskerville;
+src: url("fonts/Baskerville-Italic.otf") format("opentype");
+}
+
+@font-face {
+font-family: Univers;
+src: url("fonts/UniversLTStd-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: OCR;
+src: url("fonts/OCRAStd.otf") format("opentype");
+}
+
+@font-face {
+font-family: DIN;
+src: url("fonts/DINAlternate-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Letter Gothic;
+src: url("fonts/LetterGotLCY-Medi.otf") format("opentype");
+}
+
+@font-face {
+font-family: Miller;
+src: url("fonts/Miller-TextRoman.otf") format("opentype");
+}
+
+@font-face {
+font-family: Arnhem;
+src: url("fonts/Arnhem-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Proforma;
+src: url("fonts/ProformaBoldSC.otf") format("opentype");
+}
+
+@font-face {
+font-family: Interstate;
+src: url("fonts/InterstateBold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Franklin Gothic;
+src: url("fonts/ITCFranklinGothicStd-Demi.otf") format("opentype");
+}
+
+@font-face {
+font-family: Franklin Gothic;
+src: url("fonts/Gotham-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Caslon;
+src: url("fonts/Caslon224Std-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Minion;
+src: url("fonts/MinionPro-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Sabon;
+src: url("fonts/Sabon-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Sabon;
+src: url("fonts/Sabon-Bold.otf") format("opentype");
+}
+
+@font-face {
+font-family: Sabon;
+src: url("fonts/JoannaNormal.otf") format("opentype");
+}
+
+body{
+	background: url(img/Infographic.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 0% 70%;
+	display: flex;
+	display: -webkit-box;
+  	display: -moz-box;
+	display: -webkit-flex;
+	flex-flow: column;
+	-webkit-flex-flow: column;
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+section.question {
+	font-family: Brandon Grotesque;
+	font-weight: 500;
+	text-transform: uppercase;
+	font-size: 2em;
+	text-align: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+section.choices {
+	width: 70%;
+	margin-top: 2em;
+	display: flex;
+	display: -webkit-box;
+  	display: -moz-box;
+	display: -webkit-flex;
+	flex-flow: row;
+	-webkit-flex-flow: row;
+	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	justify-content: space-around;
+	-webkit-justify-content: space-around;
+}
+
+section.choices p {
+	color: white;
+	background-color: rgba(0,0,0,1);
+	width: 2.5em;
+	height: 2.5em;
+	text-align: center;
+	border-radius: 1.25em;
+	line-height: 2.4em;
+	font-family: Baskerville;
+	font-style: italic;
+	font-size: 1.8em;
+	font-weight: 100;
+}
+
+section.choices#zerolevelchoice p{
+	background-color: rgba(0,0,0,0);
+	color: black;
+	margin-left: -2.2em;	
+}
+
+section.choices p:hover {
+	background-color: rgba(0,0,0,0.6);
+}
+
+section.answer {
+	font-family: Brandon Grotesque;
+	font-weight: 900;
+	text-transform: uppercase;
+	font-size: 2em;
+	text-align: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+
+section.answer#univers {
+	font-family: Univers;
+}
+
+section.answer#ocr {
+	font-family: OCR;
+}
+
+section.answer#ffdin {
+	font-family: DIN;
+}
+
+section.answer#lettergothic {
+	font-family: Letter Gothic;
+}
+
+section.answer#times {
+	font-family: Times;
+}
+
+section.answer#miller {
+	font-family: Millers;
+}
+
+section.answer#proforma {
+	font-family: Proforma;
+}
+
+section.answer#arnhem {
+	font-family: Arnhem;
+}
+
+section.answer#interstate {
+	font-family: Interstate;
+}
+
+section.answer#franklingothic {
+	font-family: Franklin Gothic;
+}
+
+section.answer#helvetica {
+	font-family: Helvetica;
+}
+
+section.answer#gotham {
+	font-family: Gotham;
+}
+
+section.answer#ffmeta {
+	font-family: Brandon Grotesque;
+}
+
+section.answer#swift {
+	font-family: Brandon Grotesque;
+}
+
+section.answer#caslon {
+	font-family: Caslon;
+}
+
+section.answer#minion {
+	font-family: Minion;
+}
+
+section.answer#sabon {
+	font-family: Sabon;
+}
+
+section.answer#garamond {
+	font-family: Garamond;
+	font-size: Bold;
+}
+
+section.answer#optima {
+	font-family: Optima;
+	font-size: Bold;
+}
+
+section.answer#joanna {
+	font-family: Joanna;
+}
+
+section.answer#baskerville {
+	font-family: Baskerville;
+}
+
+section.answer#ffscala {
+	font-family: Brandon Grotesque;
+}
+
+section.answer#syntax {
+	font-family: Brandon Grotesque;
+}

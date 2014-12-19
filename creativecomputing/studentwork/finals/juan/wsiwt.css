@@ -1,0 +1,259 @@
+body {
+    background-image: url("pills.jpg");
+    font-family: OCR A Std; 
+    width: 100%; 
+    margin: auto;
+    clear: both; 
+    text-align: center; 
+
+}
+
+h1 {
+	font-size: 260px;
+
+    font-family: "OCR A Std", Times, serif;
+    color: #00ff00;
+}
+
+h2{
+    font-size: 120px;
+
+     font-family: "OCR A Std", Times, serif;
+     color: #99CCFF;
+     	
+}
+
+p{
+font-size: 90px;
+
+     font-family: "OCR A Std", Times, serif;
+     color: #0099FF;
+}
+
+h3
+{
+font-size: 60px;
+
+    font-family: "OCR A Std", Times, serif;
+    color: #99FFFF;
+}
+
+
+
+body {
+    font-family: OCR A Std; 
+    width: 100%; 
+    margin: auto;
+    clear: both; 
+    text-align: center; 
+    }
+
+.buttonContainer1 {
+	width: 825px;
+	height: 300px;
+	margin: 0 auto; 
+}
+
+.buttonContainer2 {
+	width: 1100px;
+	height: 300px;
+	margin: 0 auto; 
+}
+
+.button {
+    display: table;
+    width: 250px;
+    height: 100px;
+    background: black;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+
+}
+
+.button span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+
+}
+
+.button:hover {
+    background: darkgray; 
+}
+
+.button:active {
+    background: gray; 
+}
+
+.buttonClicked {
+    display: table;
+    width: 250px;
+    height: 100px;
+    background: darkgray;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+.buttonClicked span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+
+
+
+
+
+#buttonffeminineYes, #buttonmasculineNo, #buttonbothYes{
+    display: table;
+    width: 100px;
+    height: 50px;
+    background: black;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+#buttonfeminine span, #buttonmasculine span, #buttonboth span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#buttonfeminineClicked, #buttonmasculineClicked, #buttonbothClicked {
+/*     display: table; */
+/*     width: 100px; */
+/*     height: 50px; */
+    background: darkgray;
+/* 	float: left;  */
+/*     margin-left: 12.5px;  */
+/*     margin-right: 12.5px;  */
+}
+
+#buttonfeminineClicked span, #buttonmasculineClicked span, #buttonbothClicked span{
+/*     display: table-cell; */
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#feminine:hover, #masculine:hover, #both:hover {
+	background: darkgray; 
+}
+
+#feminine:active, #masculine:active, #both:active  {
+	background: gray; 
+}
+
+
+
+
+//
+
+body {
+    }
+    
+#buttonpunkYes, #buttongrungeNo, #buttonbohemianYes, #buttonprepyYes{
+    display: table;
+    width: 100px;
+    height: 50px;
+    background: black;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+#buttonpunk span, #buttongrunge span, #buttonbohemian span, #buttonprepy span{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#buttonpunkClicked, #buttongrungeClicked, #buttonbohemianClicked, #buttonprepyClicked{
+    display: table;
+    width: 100px;
+    height: 50px;
+    background: darkgray;
+	float: left; 
+    margin-left: 12.5px; 
+    margin-right: 12.5px; 
+}
+
+#buttonpunkClicked span, #buttongrungeClicked span, #buttonbohemianClicked span,#buttonprepyClicked span{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px; 
+}
+
+#punk:hover, #grunge:hover, #bohemian:hover, #prepy: hover{
+	background: darkgray; 
+}
+
+#punk:active, #grunge:active, #bohemian:active, #prepy: active{
+	background: gray; 
+}
+
+
+#feminine
+{
+    width: 250px;
+	height: 50px;
+	margin: 70 auto;
+}
+
+#masculine
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+#both
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#punk
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#grunge
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#bohemian
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#prepy
+{
+    width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+

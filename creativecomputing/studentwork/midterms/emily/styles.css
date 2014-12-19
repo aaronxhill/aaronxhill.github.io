@@ -1,0 +1,24 @@
+h1 {
+font-family: 'Monoton', cursive;
+ color: lightBlue;
+  font-size: 200%;
+ 
+ 
+}
+
+body {
+    
+    background: #000000 url('http://www.gif-archiv.de/GIf-Neon/Neon_081.GIF');
+    background-repeat: repeat-x;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+    font-size: 220%;
+    color: white;
+    font-weight: bold;
+  
+    
+    
+     
+    }
+    
+

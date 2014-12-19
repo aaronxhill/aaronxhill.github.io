@@ -1,0 +1,31 @@
+body {
+    font-family:'Pacifico', cursive;
+    font-size:160%;
+    width: 1032px; 
+    margin: auto;
+    clear: both; 
+    text-align:center; 
+    }
+    
+.buttonContainer {
+	float: block; 
+}
+
+.button {
+	float: left; 
+	border: 10px solid white; 
+}
+
+.button:hover {
+	border: 10px solid blue; 
+}   
+
+.button:active {
+    border: 10px solid white; 
+}
+
+.buttonClicked {
+	float: left; 
+	border: 10px solid blue; 
+}
+

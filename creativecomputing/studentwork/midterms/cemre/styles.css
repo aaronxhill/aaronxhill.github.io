@@ -1,0 +1,42 @@
+/*body {
+    font-family: bodoni; 
+    margin-left:549px;
+    background-image: url("background.jpg"); 
+    color:white;
+    text-align: 
+ }
+title{
+color: inherit #fafafa
+}*/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+
+body {
+font-family: 'Open Sans', sans-serif;   
+font:bold 18px/20px "Open Sans", sans-serif;
+font-weight: 100;
+border-color: transparent;
+letter-spacing: normal;
+border-style: inherit;
+background-image: url("banana.jpg");
+text-emphasis-color: rgb(255,184,52);
+margin-top: 100px; auto;
+margin-left: 380px; auto;
+margin-right: 250px;    
+text-align: center;}
+
+input#subButton{
+border: 1px solid #33842a;
+cursor: pointer;
+padding:5px 25px;
+border-radius: 10px;
+background:#35b128;
+color: #f3f3f3;
+font-size: 1.1em;
+}
+
+input#nameTextBox{
+border-radius: 10px;
+font-size: 1.1em;
+}
+
