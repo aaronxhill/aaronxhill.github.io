@@ -15,7 +15,7 @@ body {
 
 .line {
   fill: none;
-  stroke: #2c7bb6;
+  stroke: #fe0002;
   stroke-width: 2px;
 }
 
@@ -33,6 +33,12 @@ body {
 
 h1 {
     clear: both;
+    font-size: 24px;
+    font-weight: normal; 
+}
+
+h2 {
+    font-size: 18px;
 }
 
 #notFound {
@@ -63,7 +69,7 @@ h1 {
 }
 
 #button:active {
-    background: #2c7bb6;
+    background: #fe0002;
 }
 
 #button span {
@@ -71,7 +77,8 @@ h1 {
     text-align: center;
     vertical-align: middle;
     color: white;
-    font-size: 20px; 
+    font-size: 18px; 
+    font-weight: bold; 
 }
 
 #schoolSearch {
@@ -85,6 +92,8 @@ h1 {
 
 #searchHeader {
     height: 70px; 
+    width: 1045px;
+    padding-left: 15px;
 }
 
 #contentContainer {
@@ -93,11 +102,11 @@ h1 {
 }
 
 #schoolName {
-    font-size: 3em;    
+/*     font-size: 3em;     */
     margin-top: 0;  
 }
 
-/* tooltiop */
+/* tooltip */
 
 #tooltip, #tooltip2, #tooltip3 {
         position: absolute;
@@ -130,10 +139,12 @@ h1 {
 .typeahead,
 .tt-query,
 .tt-hint {
-  width: 396px;
+/*   width: 396px; */
+  width: 762px;
   height: 30px;
   padding: 8px 12px;
-  font-size: 24px;
+  font-size: 18px;
+  font-family: sans-serif;
   line-height: 30px;
   border: 2px solid #ccc;
   -webkit-border-radius: 8px;
@@ -144,7 +155,8 @@ h1 {
 }
 
 .tt-dropdown-menu {
-  width: 422px;
+/*   width: 422px; */
+  width: 838px;
   margin-top: 12px;
   padding: 8px 0;
   background-color: #fff;
@@ -171,6 +183,7 @@ h1 {
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
+  font-family: sans-serif;
   line-height: 24px;
 }
 
