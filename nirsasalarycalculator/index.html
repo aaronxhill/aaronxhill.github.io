@@ -651,7 +651,7 @@
 
 <div id="stepTwo">
 	<h4 id="dollars">$<span id="amtSal"></span></h4>
-	<p>The average salary of those who share the characteristics you listed above.</p>
+	<p>The average salary of a NIRSA member who shares the characteristics you provided is <span id="amtSalP"></span>. </p>
 </div>
 
 <script>
@@ -666,7 +666,7 @@ jQuery.validator.addMethod("money", function(value, element) {
   	}
   }
   else return false;
-}, "Please enter a value between $15,000 and $75,000.");
+}, "Median household income should be a value between $15,000 and $75,000. The national median household income is $51,939.");
 
 form.validate({
 	rules: {
@@ -747,9 +747,31 @@ $( "button" ).click(function() {
 }
 
   $("#amtSal").replaceWith(numberWithCommas(Math.round(salEst)))
+  $("#amtSalP").replaceWith(numberWithCommas(Math.round(salEst)))
 
 $("#stepTwo").show()
 $("button").hide()
+
+$("#position").prop("disabled", true)
+$("#supftpro").prop("disabled", true)
+$("#supftoth").prop("disabled", true)
+$("#supga").prop("disabled", true)
+$("#supstu").prop("disabled", true)
+$("#supnonstupt").prop("disabled", true)
+$("#masters").prop("disabled", true)
+$("#crss").prop("disabled", true)
+$("#rcrsp").prop("disabled", true)
+$("#numycr").prop("disabled", true)
+$("#age").prop("disabled", true)
+$("#gender").prop("disabled", true)
+$("#race").prop("disabled", true)
+$("#disability").prop("disabled", true)
+$("#enroll").prop("disabled", true)
+$("#budget").prop("disabled", true)
+$("#pubpriv").prop("disabled", true)
+$("#region").prop("disabled", true)
+
+$("#mdhhinc").prop("readonly", true)
 
 
 }
