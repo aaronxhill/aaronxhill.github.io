@@ -6,6 +6,7 @@
   <meta charset="utf-8">
 
   <title>TYFBAF</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
   <meta name="description" content="Thank You">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,900' rel='stylesheet' type='text/css'>
   <!-- <link rel="stylesheet" href="css/styles.css"> -->
@@ -165,6 +166,8 @@
 				document.getElementById('partTwo').style.display = 'inline';
 				document.getElementById('partOne').style.display = 'none';
 				document.getElementsByTagName('body')[0].style.background = 'white';
+				dataHolder.submitAble = false; 
+				clearAllInputs();
 		}
 
 		function twoSkipped () {
@@ -185,12 +188,16 @@
 		}
 
 		function twoSubmit () {
+
+			if (dataHolder.submitAble === true) {
+
 			document.getElementById('partOne').style.display = 'inline';
 			document.getElementById('partTwo').style.display = 'none';
 			document.getElementsByTagName('body')[0].style.background = 'url(gg1.jpg)';
 			document.getElementsByTagName('body')[0].style.backgroundSize = 'cover';
+			dataHolder.submitAble = true; 
 			clearAllInputs()
-
+			}
 		}
 
 		function twoCancel () {
