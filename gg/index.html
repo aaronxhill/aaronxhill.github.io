@@ -1,0 +1,342 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>TYFBAF</title>
+  <meta name="description" content="Thank You">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,900' rel='stylesheet' type='text/css'>
+  <!-- <link rel="stylesheet" href="css/styles.css"> -->
+  <style type="text/css">
+
+		body {
+		    font-family: 'Roboto', sans-serif;
+		    font-weight: 900; 
+		    width: 700px; 
+		    margin: auto;
+		    clear: both; 
+		    text-align: center; 
+		    background: url(gg1.jpg);
+		    background-size: cover;
+		    }
+
+		#allContent {
+		       position:absolute;
+		   bottom:0;
+
+		}
+
+		h1 {
+		    margin: 0px;
+		}
+
+		h2 {
+		    font-size: 125px; 
+		    margin: 0px;
+		   color: red;
+		   /*-webkit-text-fill-color: #a65d56; /* Will override color (regardless of order) */
+		   /*-webkit-text-stroke-width: 2px;*/
+		   /*-webkit-text-stroke-color: white;*/
+
+		}
+
+		.button {
+		    display: table;
+		    width: 660px;
+		    height: 90px;
+		    /*background: black;*/
+			float: left; 
+		    margin: 20px; 
+		}
+
+		.smallerButton {
+		    display: table;
+		    width: 310px;
+		    height: 90px;
+		    /*background: black;*/
+		    float: left; 
+		    margin: 20px; 
+		}
+
+		#skipped {
+		    background: #aa9f9d; 
+		}
+
+		#cancel {
+		    background: #d75a81; 
+		}
+
+		#submit {
+		    background: #5ea9cc;
+		}
+
+		#done {
+		    background: #525a98;
+		}
+
+		.button span, .smallerButton span {
+		    display: table-cell;
+		    text-align: center;
+		    vertical-align: middle;
+		    color: white;
+		    font-size: 25px; 
+		}
+
+		#partTwo {
+		    display: none;
+		}
+
+		.buttonContainer {
+			width: 250px;
+			height: 50px;
+			margin: 0 auto; 
+		}
+
+		#catPhoto {
+			max-height: 500px; 
+		}
+
+		#ratingButtonContainer {
+		    width: 700px; 
+		    height: 140px;
+		}
+
+		.ratingButton {
+		    display: table;
+		    width: 100px;
+		    height: 100px;
+		    float: left; 
+		    margin: 20px;
+		    background: #ffd63d;
+		}
+
+		.ratingButton span {
+		    display: table-cell;
+		    text-align: center;
+		    vertical-align: middle;
+		    color: white;
+		    font-size: 50px; 
+		}
+
+  </style>
+  <!-- <script src="scripts/gg.js"></script> -->
+  <script>
+
+		 window.onload = function () {
+
+			clearAllInputs()
+
+			var buttonOneClick = document.getElementById('done'); 
+			buttonOneClick.addEventListener('click', buttonOneClicked);
+
+			var buttonTwoSkipped = document.getElementById('skipped'); 
+			buttonTwoSkipped.addEventListener('click', twoSkipped);
+
+			var buttonTwoSubmit = document.getElementById('submit'); 
+			buttonTwoSubmit.addEventListener('click', twoSubmit);
+
+			var buttonTwoCancel = document.getElementById('cancel'); 
+			buttonTwoCancel.addEventListener('click', twoCancel);
+
+			var buttonRating1 = document.getElementById('b1'); 
+			buttonRating1.addEventListener('click', buttonRating1Pressed);
+
+			var buttonRating2 = document.getElementById('b2'); 
+			buttonRating2.addEventListener('click', buttonRating2Pressed);
+
+			var buttonRating3 = document.getElementById('b3'); 
+			buttonRating3.addEventListener('click', buttonRating3Pressed);
+
+			var buttonRating4 = document.getElementById('b4'); 
+			buttonRating4.addEventListener('click', buttonRating4Pressed);
+
+			var buttonRating5 = document.getElementById('b5'); 
+			buttonRating5.addEventListener('click', buttonRating5Pressed);
+
+		}
+
+		var dataHolder = new Object; 
+		dataHolder.ratingHolder = null; 
+		dataHolder.submitAble = false; 
+
+		function buttonOneClicked () {
+				document.getElementById('partTwo').style.display = 'inline';
+				document.getElementById('partOne').style.display = 'none';
+				document.getElementsByTagName('body')[0].style.background = 'white';
+		}
+
+		function twoSkipped () {
+			document.getElementById('partTwo').style.display = 'inline';
+			document.getElementById('partOne').style.display = 'none';
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 0; 
+			document.getElementById('b1').style.background = '#aa9f9d';
+			document.getElementById('b2').style.background = '#aa9f9d';
+			document.getElementById('b3').style.background = '#aa9f9d';
+			document.getElementById('b4').style.background = '#aa9f9d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#ffd63d';
+
+		}
+
+		function twoSubmit () {
+			document.getElementById('partOne').style.display = 'inline';
+			document.getElementById('partTwo').style.display = 'none';
+			document.getElementsByTagName('body')[0].style.background = 'url(gg1.jpg)';
+			document.getElementsByTagName('body')[0].style.backgroundSize = 'cover';
+			clearAllInputs()
+
+		}
+
+		function twoCancel () {
+			document.getElementById('partOne').style.display = 'inline';
+			document.getElementById('partTwo').style.display = 'none';
+			document.getElementsByTagName('body')[0].style.background = 'url(gg1.jpg)';
+			document.getElementsByTagName('body')[0].style.backgroundSize = 'cover';
+			dataHolder.submitAble = false; 
+			dataHolder.rating = null; 
+			clearAllInputs();
+		}
+
+		function clearAllInputs () {
+			document.getElementById('b1').style.background = '#aa9f9d';
+			document.getElementById('b2').style.background = '#aa9f9d';
+			document.getElementById('b3').style.background = '#aa9f9d';
+			document.getElementById('b4').style.background = '#aa9f9d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#aa9f9d';
+			}
+		}
+
+		function buttonRating1Pressed () {
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 1; 
+			document.getElementById('b1').style.background = '#ffd63d';
+			document.getElementById('b2').style.background = '#aa9f9d';
+			document.getElementById('b3').style.background = '#aa9f9d';
+			document.getElementById('b4').style.background = '#aa9f9d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+
+		}
+
+		function buttonRating2Pressed () {
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 2; 
+			document.getElementById('b1').style.background = '#ffd63d';
+			document.getElementById('b2').style.background = '#ffd63d';
+			document.getElementById('b3').style.background = '#aa9f9d';
+			document.getElementById('b4').style.background = '#aa9f9d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+
+		}
+
+		function buttonRating3Pressed () {
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 3; 
+			document.getElementById('b1').style.background = '#ffd63d';
+			document.getElementById('b2').style.background = '#ffd63d';
+			document.getElementById('b3').style.background = '#ffd63d';
+			document.getElementById('b4').style.background = '#aa9f9d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+
+		}
+
+		function buttonRating4Pressed () {
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 4; 
+			document.getElementById('b1').style.background = '#ffd63d';
+			document.getElementById('b2').style.background = '#ffd63d';
+			document.getElementById('b3').style.background = '#ffd63d';
+			document.getElementById('b4').style.background = '#ffd63d';
+			document.getElementById('b5').style.background = '#aa9f9d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+
+		}
+
+		function buttonRating5Pressed () {
+			if (dataHolder.submitAble === false) {
+				document.getElementById('submit').style.background = '#5ea9cc';
+			}
+			dataHolder.submitAble = true; 
+			dataHolder.rating = 5; 
+			document.getElementById('b1').style.background = '#ffd63d';
+			document.getElementById('b2').style.background = '#ffd63d';
+			document.getElementById('b3').style.background = '#ffd63d';
+			document.getElementById('b4').style.background = '#ffd63d';
+			document.getElementById('b5').style.background = '#ffd63d';
+			document.getElementById('skipped').style.background = '#aa9f9d';
+
+		}
+
+  </script>
+  
+</head>
+
+<!-- [ { _id: 5677f32248af3b6428989729,
+    season: 5,
+    watched: false,
+    airdate: '25 Nov. 1989',
+    title: 'Comedy of Errors',
+    episodeDescription: 'After a high school classmate dies unexpectedly, Dorothy decides to fulfill a long-forgotten dream of being a stand-up comedian.',
+    episodeNumber: '9',
+    twoParter: false,
+    randomOrder: 4 } ] -->
+
+<body>
+
+	<div id='allContent'>
+
+	<div id='partOne'>
+
+		<h1 class='watchNext'>Watch next:</h1>
+		<h2 class='season'>s3 / e20</h2>
+		<!-- <h1 class='episode'>Episode 20</h1> -->
+
+		<div class='button' id='done'><span>done with this episode</span></div>
+
+	</div>
+
+	 <div id='partTwo'>
+
+	 	<h2>s3 / e20</h2>
+
+	 	<div id='ratingButtonContainer'>
+		 	<div class='ratingButton' id='b1'><span>1</span></div>
+		 	<div class='ratingButton' id='b2'><span>2</span></div>
+		 	<div class='ratingButton' id='b3'><span>3</span></div>
+		 	<div class='ratingButton' id='b4'><span>4</span></div>
+		 	<div class='ratingButton' id='b5'><span>5</span></div>
+	 	</div>
+
+		<div class='button' id='skipped'><span>skip this episode</span></div>
+		<div class='smallerButton' id='cancel'><span>cancel</span></div>
+		<div class='smallerButton' id='submit'><span>submit</span></div>
+
+
+	</div>   
+</div>
+    
+</body>
+</html>
