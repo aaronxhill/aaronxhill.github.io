@@ -31,15 +31,18 @@
 
 #nots {
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 	/*background: #cccccc;*/
 }
 
-/* begin edk*/
-#five a, #four a, #three a, #two a, #one a {
+#five a, #four a, #three a, #two a, #one a, #nots a {
 	background:#fff;
+	padding-left:25px;
 }
-/* end edk*/
+#five a:hover, #four a:hover, #three a:hover, #two a:hover, #one a:hover {
+	background:#f6f6f6;
+}
+
 
 
 
