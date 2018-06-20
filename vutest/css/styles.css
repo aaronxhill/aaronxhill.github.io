@@ -1,37 +1,37 @@
 #five {
 	background: #54278f;
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 	/*background-image: linear-gradient(top, red, red 70%, transparent 70%, transparent 100%)*/
 }
 
 #four {
 	background: #756bb1;
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 }
 
 #three {
 	background: #9e9ac8;
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 }
 
 #two {
 	background: #cbc9e2;
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 }
 
 #one {
 	background: #f2f0f7;
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 }
 
 #nots {
 	display: block; /*edk*/
-	padding-left:25px; /*edk*/
+	padding-left:25px !important; /*edk*/
 	/*background: #cccccc;*/
 }
 
