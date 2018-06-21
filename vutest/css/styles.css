@@ -1,32 +1,32 @@
 #five {
 	background: #54278f;
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 	/*background-image: linear-gradient(top, red, red 70%, transparent 70%, transparent 100%)*/
 }
 
 #four {
 	background: #756bb1;
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 }
 
 #three {
 	background: #9e9ac8;
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 }
 
 #two {
 	background: #cbc9e2;
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 }
 
 #one {
 	background: #f2f0f7;
 	display: block; /*edk*/
-	padding-left:25px !important; /*edk*/
+	padding-left:25px; /*edk*/
 }
 
 #nots {
@@ -35,17 +35,14 @@
 	/*background: #cccccc;*/
 }
 
+/* begin edk*/
 #five a, #four a, #three a, #two a, #one a, #nots a {
 	background:#fff;
-	padding-left:25px;
+	padding-left:8px;
 }
 #five a:hover, #four a:hover, #three a:hover, #two a:hover, #one a:hover {
 	background:#f6f6f6;
 }
 
+/* end edk*/
 
-
-
-#main {
-	margin-top: 40px;
-}
