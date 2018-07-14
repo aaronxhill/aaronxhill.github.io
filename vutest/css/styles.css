@@ -33,6 +33,37 @@
 	padding-left:25px; /*edk*/
 }
 
+#fiveDis {
+	background: #fff;
+	display: block; /*edk*/
+	padding-left:25px; /*edk*/
+	/*background-image: linear-gradient(top, red, red 70%, transparent 70%, transparent 100%)*/
+}
+
+#fourDis {
+	background: #fff;
+	display: block; /*edk*/
+	padding-left:25px; /*edk*/
+}
+
+#threeDis {
+	background: #fff;
+	display: block; /*edk*/
+	padding-left:25px; /*edk*/
+}
+
+#twoDis {
+	background: #fff;
+	display: block; /*edk*/
+	padding-left:25px; /*edk*/
+}
+
+#oneDis {
+	background: #fff;
+	display: block; /*edk*/
+	padding-left:25px; /*edk*/
+}
+
 #nots {
 	display: block; /*edk*/
 	padding-left:25px; /*edk*/
@@ -48,5 +79,61 @@
 	background:#f6f6f6;
 }
 
+/*fix that you can hover on just the left part*/
+#nots a:hover, #nots:hover {
+/*#nots:hover {*/
+	background: red;
+}
+
+#fiveDis a, #fourDis a, #threeDis a, #twoDis a, #oneDis a, #notsDis a {
+	background:#fff;
+	padding-left:8px;
+}
+
+a.disabled {
+	cursor: not-allowed; 
+}
+
+/*#button-xt {
+	transform: rotate(45deg);
+     width: 100px;
+}*/
+
+/*#button-xt:after{
+  content:"";
+  position:absolute;
+  border-top:1px solid red;
+  width:100%;
+  transform: rotate(45deg);
+  transform-origin: 0% 0%;
+}*/
+
+.b-actions {
+	padding: 15px 0px;
+}
+
+#theresMore {
+	padding: 15px 0px;
+}
+
+
+/*#button-xt {
+	transform: rotate(45deg);
+     width: 100px;
+}*/
+
+/* Use this to change behavior of a href */
+/*#two {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}*/
+
+
+/*#five a:hover, #four a:hover, #three a:hover, #two a:hover, #one a:hover {
+	background:#f6f6f6;
+}
+*/
 /* end edk*/
 
