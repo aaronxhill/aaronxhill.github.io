@@ -6,11 +6,11 @@ var allImages = [{"s_no":2,"artist":"Giorgio de Chirico","title":"The Uncertaint
 
 	buttonsStatus.pl = buttonsStatus.sh = buttonsStatus.or = buttonsStatus.co = buttonsStatus.te = buttonsStatus.va = buttonsStatus.si = 0;
 	buttonsStatus.po = buttonsStatus.li = buttonsStatus.ar = buttonsStatus.re = buttonsStatus.sp = 0;
-	buttonsStatus.map = buttonsStatus.kinetic = buttonsStatus.reflection = buttonsStatus.hasText = 0; 
+	buttonsStatus.ma = buttonsStatus.ki = buttonsStatus.rf = buttonsStatus.tx = false; 
 
 	maxsInCurrent.pl = maxsInCurrent.sh = maxsInCurrent.or = maxsInCurrent.co = maxsInCurrent.te = maxsInCurrent.va = maxsInCurrent.si = 0;
 	maxsInCurrent.po = maxsInCurrent.li = maxsInCurrent.ar = maxsInCurrent.re = maxsInCurrent.sp = 0;
-	maxsInCurrent.map = maxsInCurrent.kinetic = maxsInCurrent.reflection = maxsInCurrent.hasText = 0; 
+	maxsInCurrent.ma = maxsInCurrent.ki = maxsInCurrent.rf = maxsInCurrent.tx = false; 
 
 
 
@@ -61,10 +61,10 @@ function applyFilters(origInput) {
 	var tenthFilter = filterOne(ninthFilter, buttonsStatus.si, 'si')
 	var eleventhFilter = filterOne(tenthFilter, buttonsStatus.re, 're')
 	var twelvthFilter = filterOne(eleventhFilter, buttonsStatus.sp, 'sp')
-	var thirteenthFilter = filterOne(twelvthFilter, buttonsStatus.map, 'ma')
-	var fourteenthFilter = filterOne(thirteenthFilter, buttonsStatus.kinetic, 'ki')
-	var fifteenthFilter = filterOne(fourteenthFilter, buttonsStatus.reflection, 'rf')
-	var finalSelection = filterOne(fifteenthFilter, buttonsStatus.hasText, 'tx')
+	var thirteenthFilter = filterOne(twelvthFilter, buttonsStatus.ma, 'ma')
+	var fourteenthFilter = filterOne(thirteenthFilter, buttonsStatus.ki, 'ki')
+	var fifteenthFilter = filterOne(fourteenthFilter, buttonsStatus.rf, 'rf')
+	var finalSelection = filterOne(fifteenthFilter, buttonsStatus.tx, 'tx')
 
 	currentSelection = finalSelection
 	getMaxes(currentSelection)
@@ -73,7 +73,7 @@ function applyFilters(origInput) {
 function getMaxes(sel) {
 	maxsInCurrent.po = maxsInCurrent.li = maxsInCurrent.ar = maxsInCurrent.re = maxsInCurrent.sp = 0;
 	maxsInCurrent.pl = maxsInCurrent.sh = maxsInCurrent.or = maxsInCurrent.co = maxsInCurrent.te = maxsInCurrent.va = maxsInCurrent.si = 0;
-	maxsInCurrent.map = maxsInCurrent.kinetic = maxsInCurrent.reflection = maxsInCurrent.hasText = 0;
+	maxsInCurrent.ma = maxsInCurrent.ki = maxsInCurrent.rf = maxsInCurrent.tx = false;
 	for (var i=0; i<sel.length; i++) {
 		if (sel[i].po > maxsInCurrent.po) {maxsInCurrent.po = sel[i].po}
 			if (sel[i].li > maxsInCurrent.li) {maxsInCurrent.li = sel[i].li}
@@ -87,10 +87,10 @@ function getMaxes(sel) {
 											if (sel[i].te > maxsInCurrent.te) {maxsInCurrent.te = sel[i].te}
 												if (sel[i].va > maxsInCurrent.va) {maxsInCurrent.va = sel[i].va}
 													if (sel[i].si > maxsInCurrent.si) {maxsInCurrent.si = sel[i].si}
-														if (sel[i].ma > maxsInCurrent.map) {maxsInCurrent.map = sel[i].ma}
-															if (sel[i].ki > maxsInCurrent.kinetic) {maxsInCurrent.kinetic = sel[i].ki}
-																if (sel[i].rf > maxsInCurrent.reflection) {maxsInCurrent.reflection = sel[i].rf}
-																	if (sel[i].tx > maxsInCurrent.hasText) {maxsInCurrent.hasText = sel[i].tx}
+														if (sel[i].ma > maxsInCurrent.ma) {maxsInCurrent.ma = sel[i].ma}
+															if (sel[i].ki > maxsInCurrent.ki) {maxsInCurrent.ki = sel[i].ki}
+																if (sel[i].rf > maxsInCurrent.rf) {maxsInCurrent.rf = sel[i].rf}
+																	if (sel[i].tx > maxsInCurrent.tx) {maxsInCurrent.tx = sel[i].tx}
 																}
 															console.log(currentSelection.length);
 	// iterateAllButtonsAfterFilter()
@@ -192,13 +192,7 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 			// dd.append(htmlsDis[i]);
 		}
 	}
-	if (currentSelection.length === 1) {
-		$( "button#di" ).html( "display " + currentSelection.length + " image");
-	}
-	else if (currentSelection.length < 404) {
-		$( "button#di" ).html( "display " + currentSelection.length + " images");
-	}
-	else {$( "button#di" ).html("no images selected");}
+	updateDisplayButton()
 
 	// console.log(buttonsStatus.co);
 }
@@ -206,7 +200,59 @@ handleButton();
 
 }
 
-function handleBool () {
+// vu-ma, vu-ki, vu-rf, vu-tx
+
+function handleBool (vvSelectorB) {
+	var thisVarB = vvSelectorB.substr(-2);
+	if (maxsInCurrent[thisVarB] == false) {
+		if (buttonsStatus[thisVarB] == false) {
+			// do nothing; render yellow out
+		}
+		else { //buttonsStatus == true
+			// - 1 and render 
+			buttonsStatus[thisVarB] = false
+		}
+	}
+	else { // maxsInCurrent == true
+	if (buttonsStatus[thisVarB] == false) {
+			// + 1 and render
+			buttonsStatus[thisVarB] = true
+		}
+		else { //buttonsStatus == true
+			// - 1 and render
+			buttonsStatus[thisVarB] = false
+		}		
+	}
+	applyFilters(currentSelection)
+	renderAll()
+	updateDisplayButton()
+}
+
+function renderBool (vvSelectorB) {
+	// var btnSelB = "#button-" + vvSelectorB.substr(-2);
+	var btnSelB = "#vu-" + vvSelectorB.substr(-2);
+	var thisVarB = vvSelectorB.substr(-2);
+	if (maxsInCurrent[thisVarB] == false) {
+		if (buttonsStatus[thisVarB] == false) {
+			// yellow out
+			$(btnSelB).css("background", "yellow");
+		}
+		else { //buttonsStatus == true
+			// selected 
+			$(btnSelB).css("background", "#54278f");
+		}
+	}
+	else { // maxsInCurrent == true
+	if (buttonsStatus[thisVarB] == false) {
+			// not selected
+			$(btnSelB).css("background", "#fff");
+		}
+		else { //buttonsStatus == true
+			// selected
+			$(btnSelB).css("background", "#54278f");
+		}		
+	}
+	// console.log(btnSelB)
 
 }
 
@@ -313,10 +359,37 @@ function renderAll() {
 	renderDropdown(".vu-ar");
 	renderDropdown(".vu-re");
 	renderDropdown(".vu-sp");
+	// vu-ma, vu-ki, vu-rf, vu-tx
+	renderBool("vu-ma");
+	renderBool("vu-ki");
+	renderBool("vu-rf");
+	renderBool("vu-tx");
+}
+
+function updateDisplayButton() {
+		if (currentSelection.length === 1) {
+		$( "button#di" ).html( "display " + currentSelection.length + " image");
+	}
+	else if (currentSelection.length < 404) {
+		$( "button#di" ).html( "display " + currentSelection.length + " images");
+	}
+	else {$( "button#di" ).html("no images selected");}
 }
 
 $( document ).ready(function() {
 	console.log( "ready!" );
+	$( "#vu-ki" ).click(function(){
+		handleBool("vu-ki")
+	})
+	$( "#vu-rf" ).click(function(){
+		handleBool("vu-rf")
+	})
+	$( "#vu-ma" ).click(function(){
+		handleBool("vu-ma")
+	})
+	$( "#vu-tx" ).click(function(){
+		handleBool("vu-tx")
+	})
 	$("#theresMore").hide();
 	renderAll()
 	$( "#tm" ).click(function() {
@@ -324,9 +397,10 @@ $( document ).ready(function() {
 			loadNext9();
 
 		});
-	$( "#re" ).click(function() {
+	$( "#resett" ).click(function() {
 		buttonsStatus.pl = buttonsStatus.sh = buttonsStatus.or = buttonsStatus.co = buttonsStatus.te = buttonsStatus.va = buttonsStatus.si = 0;
 		buttonsStatus.po = buttonsStatus.li = buttonsStatus.ar = buttonsStatus.re = buttonsStatus.sp = 0;
+		buttonsStatus.ma = buttonsStatus.ki = buttonsStatus.rf = buttonsStatus.tx = false;
 
 		applyFilters(allImages)
 
