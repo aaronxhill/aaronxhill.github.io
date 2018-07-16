@@ -206,10 +206,6 @@ handleButton();
 
 }
 
-function handleFilter () {
-
-}
-
 function handleBool () {
 
 }
