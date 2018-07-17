@@ -2,6 +2,12 @@
 	padding-top: 55px; 
 }
 
+#button-pl:hover {
+/*.btn-outline-dark:hover {*/
+    background-color: red;
+    background: red; 
+}
+
 #five {
 	background: #54278f;
 	display: block; /*edk*/
@@ -136,4 +142,60 @@ a.disabled {
 }
 */
 /* end edk*/
+
+/*#main {
+        max-width: 1340px;
+}*/
+
+#filterss {
+	padding-top: 20px; 
+}
+
+img {
+    max-width: 360px;
+    height: auto;
+    padding-top: 25px;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+/*.btn.btn-outline-dark:hover,
+.btn.btn-outline-dark:focus,
+.btn.btn-outline-dark:active,
+.btn.btn-outline-dark.active {
+  color: #black;
+  background-color: pink;
+  border-color: pink;
+}
+*/
+
+/*.btn-outline-dark:hover {
+  color: black;
+  background-color: black;
+  border-color: black;
+}*/
+
+/* EDK - BEGIN DIAGONAL LINE FOR BUTTONS */
+
+.btn-outline-dark.dropdown-toggle.diag {
+  background: linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px) );
+}
+.btn-outline-dark.dropdown-toggle.diag:hover {
+	background:#f00;
+	color:#fff;
+}
+
+.hoverr {
+	background:#f00;
+	color:#fff;	
+}
+
+/* EDK - END DIAGONAL LINE FOR BUTTONS */
 

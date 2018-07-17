@@ -12,8 +12,6 @@ var allImages = [{"s_no":2,"artist":"Giorgio de Chirico","title":"The Uncertaint
 	maxsInCurrent.po = maxsInCurrent.li = maxsInCurrent.ar = maxsInCurrent.re = maxsInCurrent.sp = 0;
 	maxsInCurrent.ma = maxsInCurrent.ki = maxsInCurrent.rf = maxsInCurrent.tx = false; 
 
-
-
 	var currentSelection = [];
 applyFilters(allImages); // initialize
 var iterateAgain = false;
@@ -128,6 +126,7 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 	// var forMaxsInCurrent = vvSelector.substr(1, 2); // to be used to get the right value from maxsInCurrent
 	// var maxsInCurrent = {'area': 5, 'line': 5, 'point': 5, 'si': 5, 'va': 2, 'co': 5, 'or': 2, 'pl': 5, 'sh': 4, 'te': 2}; // temp for testing
 	var colorsForClicks = ['#54278f', '#756bb1', '#9e9ac8', '#cbc9e2', '#f2f0f7', '#fff', '#fff'];
+	var colorsForClicksRev = ['#fff', '#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f'];
 	var numbersForClicks = ['five', 'four', 'three', 'two', 'one', 'null', 'nots'];
 
 	// clickVvs('vu-co', 'two')
@@ -149,11 +148,38 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 		else {
 			$(btnSel).css("background", colorsForClicks[6]);
 		}
+		// if (maxsInCurrent[thisVar] === 0) { 
 		if (maxsInCurrent[thisVar] === 0) { 
-			$(btnSel).css("background", "yellow");
+			// var writeCss = "linear-gradient(to top right, #" + colorsForClicks[buttonsStatus[vvSelector.substr(-2)]] + "calc(50% - 1px), #f00, #" + colorsForClicks[buttonsStatus[vvSelector.substr(-2)]] + "calc(50% + 1px)"
+			// $(btnSel).css("background", "yellow");
+			$(btnSel).addClass("diag");
+			$(".btn-outline-dark.diag").css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
+			// $(".btn-outline-dark.diag").css("background", writeCss);
+			// console.log(btnSel)
 		}
+		// var gotHoverColor = false; 
+		// var thisColor;
 		for (var i=0; i<7; i++) {
 			if (translateMaxToStartingPoint(maxsInCurrent[thisVar]) <= i) {
+				// $("#button-pl").hover(function() {$(this).css("background-color","red")});
+				// if (gotHoverColor === false) {
+				// 	thisColor = colorsForClicks[i];
+				// 	// $( '#button-pl' ).hover(function() {$(this).css("background-color", "red")});
+				// 	// $("#button-pl").hover(function() {$(this).css("background-color",colorsForClicks[i])});
+				// 	// console.log("TOOTS")
+				// 	// console.log(btnSel)
+				// 	// console.log(colorsForClicks[i])
+				// 	$( btnSel ).hover(
+				// 		  function() {
+				// 		    $( this ).css( "background", thisColor );
+				// 		    console.log(colorsForClicks[i])
+				// 		    console.log(i)
+				// 		  }, function() {
+				// 		    $( this ).css( "background", "#fff" );
+				// 		  }
+				// 		);
+				// 	gotHoverColor = true; 
+				// }
 				if (['po', 'li', 'ar', 're', 'sp'].includes(thisVar)) {
 					if ([0, 2, 5, 6].includes(i)) {
 						dd.append(htmls[i]);
@@ -176,6 +202,7 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 							else {buttonsStatus[thisVar] = 0;}
 				  			// console.log(translateStartingPointToMax(j))
 				  			applyFilters(currentSelection);
+				  			// applyFilters(allImages);
 				  			renderAll()
 				  		});
 				} 
@@ -196,8 +223,34 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 
 	// console.log(buttonsStatus.co);
 }
-handleButton();
 
+// handleButton();
+// var colorsForClicksR = colorsForClicks.reverse();
+var btnSel = "#button-" + vvSelector.substr(-2);
+					// if (maxsInCurrent[vvSelector.substr(-2)] > buttonsStatus[vvSelector.substr(-2)]) {
+					$( btnSel ).hover(
+						  function() {
+						    $( this ).css( "background", colorsForClicksRev[maxsInCurrent[vvSelector.substr(-2)]] );
+						    						    // if (maxsInCurrent[vvSelector.substr(-2)] <= buttonsStatus[vvSelector.substr(-2)]) {
+						    	// $(btnSel).addClass("diag");
+			// $(".btn-outline-dark.diag").css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
+						    // }
+						  }, function() {
+						    $( this ).css( "background", colorsForClicksRev[buttonsStatus[vvSelector.substr(-2)]]);
+			// 			    if (maxsInCurrent[vvSelector.substr(-2)] <= buttonsStatus[vvSelector.substr(-2)]) {
+			// 			    	$(btnSel).addClass("diag");
+			// $(".btn-outline-dark.diag").css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
+			// 			    }
+						  }
+						);
+					if (maxsInCurrent[vvSelector.substr(-2)] <= buttonsStatus[vvSelector.substr(-2)]) {
+						$( btnSel ).off( "mouseenter mouseleave" );
+					}
+				// }
+					// if () {
+					// 	$("#vu-ma").css("color", "white")
+					// }
+handleButton()
 }
 
 // vu-ma, vu-ki, vu-rf, vu-tx
@@ -235,7 +288,10 @@ function renderBool (vvSelectorB) {
 	if (maxsInCurrent[thisVarB] == false) {
 		if (buttonsStatus[thisVarB] == false) {
 			// yellow out
-			$(btnSelB).css("background", "yellow");
+			// $(btnSelB).css("background", "yellow");
+			$(btnSelB).addClass("diag");
+			$(".btn-outline-dark.diag").css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
+
 		}
 		else { //buttonsStatus == true
 			// selected 
@@ -374,10 +430,14 @@ function updateDisplayButton() {
 		$( "button#di" ).html( "display " + currentSelection.length + " images");
 	}
 	else {$( "button#di" ).html("no images selected");}
+	$( "div#fotos" ).html(""); // ?? RETHINK THIS ??
 }
 
 $( document ).ready(function() {
 	console.log( "ready!" );
+
+	$(".btn-outline-dark.diag").css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
+
 	$( "#vu-ki" ).click(function(){
 		handleBool("vu-ki")
 	})
@@ -424,6 +484,7 @@ $( document ).ready(function() {
 						$("#theresMore").show();
 					}
 					// <button class="btn btn-success" id="di" type="button">display</button>
+				// $("#di").css("background", "white") IF YOU WANTED TO CHANGE THE BUTTON AFTER CLICK, THIS IS WHERE
 				}
 			}
 		});
