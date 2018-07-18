@@ -197,5 +197,9 @@ img {
 	color:#fff;	
 }
 
+.btn:focus {
+  outline: none;
+}
+
 /* EDK - END DIAGONAL LINE FOR BUTTONS */
 
