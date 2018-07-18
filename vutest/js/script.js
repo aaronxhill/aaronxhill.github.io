@@ -136,10 +136,12 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 		var thisVar = vvSelector.substr(-2);
 		if (buttonsStatus[thisVar] > 0) {
 			$(btnSel).css("background", colorsForClicks[translateMaxToStartingPoint(buttonsStatus[thisVar])]);
+			$(btnSel).css("color", "#fff");
 			// console.log(btnSel)	
 		}
 		else {
 			$(btnSel).css("background", colorsForClicks[6]);
+			$(btnSel).css("color", "black");
 		}
 		if (maxsInCurrent[thisVar] === 0) { 
 			$(btnSel).css("background", "linear-gradient(to top right, #fff calc(50% - 1px), #f00, #fff calc(50% + 1px)");
@@ -404,6 +406,11 @@ function renderAll() {
 	renderBool("vu-ki");
 	renderBool("vu-rf");
 	renderBool("vu-tx");
+	$( '.btn' ).hover(function(){
+		$( this ).css("box-shadow", "0 0 0 2")
+	}, function(){
+		$( this ).css("box-shadow", "0 0 0 0")
+	})
 }
 
 function updateDisplayButton() {
