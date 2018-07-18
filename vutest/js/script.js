@@ -275,6 +275,7 @@ function renderBool (vvSelectorB) {
 	if (buttonsStatus[thisVarB] == false) {
 			// not selected
 			$(btnSelB).css("background", "#fff");
+			$( btnSelB ).css( "color", "black");
 								$( btnSelB ).hover(
 						  function() {
 						    $( this ).css( "background", "#54278f");
@@ -406,11 +407,12 @@ function renderAll() {
 	renderBool("vu-ki");
 	renderBool("vu-rf");
 	renderBool("vu-tx");
-	$( '.btn' ).hover(function(){
+	$( '.btn' ).hover(function(){ // this is not working
 		$( this ).css("box-shadow", "0 0 0 2")
 	}, function(){
 		$( this ).css("box-shadow", "0 0 0 0")
 	})
+	// $('.btn').css("color", "black");
 }
 
 function updateDisplayButton() {
