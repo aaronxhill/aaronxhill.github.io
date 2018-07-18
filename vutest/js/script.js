@@ -187,11 +187,14 @@ function renderDropdown (vvSelector, bStatus, maxSel=7) {
 	} // handleButton
 
 var btnSel = "#button-" + vvSelector.substr(-2);
+var thisVar = vvSelector.substr(-2);
 					$( btnSel ).hover(
 						  function() {
 						    $( this ).css( "background", colorsForClicksRev[maxsInCurrent[vvSelector.substr(-2)]] );
+						    if (maxsInCurrent[thisVar] > 0) {$(this).css('color', '#fff')} else {$(this).css('color', 'black')}
 						  }, function() {
 						    $( this ).css( "background", colorsForClicksRev[buttonsStatus[vvSelector.substr(-2)]]);
+						    if (buttonsStatus[thisVar] == 0) {$(this).css('color', 'black')} 
 						  }
 						);
 					if (maxsInCurrent[vvSelector.substr(-2)] <= buttonsStatus[vvSelector.substr(-2)]) {
@@ -257,7 +260,7 @@ function renderBool (vvSelectorB) {
 								$( btnSelB ).hover(
 						  function() {
 						    $( this ).css( "background",  "#fff");
-						    $( this ).css( "color", "black");
+						    $( this ).css( "color", "gray");
 						  }, function() {
 						    $( this ).css( "background", "#54278f");
 						    $( this ).css( "color", "#fff");
@@ -293,7 +296,7 @@ function renderBool (vvSelectorB) {
 											$( btnSelB ).hover(
 						  function() {
 						    $( this ).css( "background",  "#fff");
-						    $( this ).css( "color", "black");
+						    $( this ).css( "color", "gray");
 						  }, function() {
 						    $( this ).css( "background", "#54278f");
 						    $( this ).css( "color", "#fff");
